@@ -337,7 +337,7 @@
 - ## For updating a single club by club ID
 
   ```
-      GET club/update
+      PUT club/update
   ```
 
   ### request parameters:
@@ -396,5 +396,40 @@
 
             }
             
+        ```
+
+- ## For deleting a single club by club ID
+
+  ```
+      DELETE club/delete
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "token": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        { 
+            "_id": "club id"
+            
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "message": "Delete Successful!"
+            }            
         ```
 
