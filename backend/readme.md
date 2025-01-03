@@ -8,7 +8,9 @@
       OTP_EMAIL = '{your email used to send OTP to users' emails}'
       OTP_EMAIL_PASSWORD = '{your password (app password) for your email}'
   ```
+
 # Notice:
+
 - Profile pic is sent an address to a cloud file storage, and not the actual picture.
 
 # Endpoints
@@ -22,6 +24,7 @@
   ### request parameters:
 
   - Body:
+
     ```
         {
             "username": "",
@@ -64,6 +67,7 @@
   ### request parameters:
 
   - Body:
+
     ```
         {
             "email": "",
@@ -99,6 +103,7 @@
     ```
 
   - Body:
+
     ```
         {
             "_id": "{recieved id}",
@@ -130,6 +135,7 @@
   ### request parameters:
 
   - Body:
+
     ```
         {
             "email": ""
@@ -152,6 +158,7 @@
   ### request parameters:
 
   - Body:
+
     ```
         {
             "email": "",
@@ -179,16 +186,17 @@
 
   ### request parameters:
 
-   - Headers:
+  - Headers:
 
-    ```
+  ```
 
-        "token": "bearer {received token of a user with userType=admin}"
+      "token": "bearer {received token of a user with userType=admin}"
 
 
-    ```
+  ```
 
   - Body:
+
     ```
         {
             "name": "",
@@ -196,14 +204,14 @@
             "category": "",
             "managers": "{_id of the users that are supposed to be managers of the club}",
             "status": "",
-            
+
             optional values include the following:
 
             "events: "{array of _id of events hosted by the club}",
             "location: "",
             "members: "{array of object in the form of {"name": "", "email": "" }}",
             "logo: "{url of an image file}",
-            
+
         }
 
     ```
@@ -239,16 +247,17 @@
 
   ### request parameters:
 
-   - Headers:
+  - Headers:
 
-    ```
+  ```
 
-        "token": "bearer {received token of a user with userType=admin}"
+      "token": "bearer {received token of a user with userType=admin}"
 
 
-    ```
+  ```
 
   - Body:
+
     ```
         {
            not required
@@ -275,5 +284,117 @@
                     "updatedAt": "2025-01-03T08:02:36.598Z",
                     "__v": 0
                 } other optional fields will be added if they were included in the request
-            ]  
+            ]
         ```
+
+- ## For single club by manager ID
+
+  ```
+      GET club/bymanagerid
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "token": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+           not required
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "_id": "",
+                "name": "",
+                "category": "",
+                "description": "",
+                "managers": [
+                    "_id of users set us managers"
+                ],
+                "events": [],
+                "members": [],
+                "status": "",
+                "createdAt": "2025-01-03T08:02:36.598Z",
+                "updatedAt": "2025-01-03T08:02:36.598Z",
+                "__v": 0
+            } other optional fields will be added if they were included in the request
+
+        ```
+
+- ## For updating a single club by club ID
+
+  ```
+      GET club/update
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "token": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+            "_id": "{club id}",
+            "name": "",
+            "description": "",
+            "category": "",
+            "managers": "{_id of the users that are supposed to be managers of the club}",
+            "status": "",
+
+            optional values include the following:
+
+            "events: "{array of _id of events hosted by the club}",
+            "location: "",
+            "members: "{array of object in the form of {"name": "", "email": "" }}",
+            "logo: "{url of an image file}",
+
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "message": "Update Successful!",
+                "newValues": {
+                    "_id": "",
+                    "name": "",
+                    "category": "",
+                    "description": "",
+                    "managers": [
+                        "_id of users set us managers"
+                    ],
+                    "events": [],
+                    "members": [],
+                    "status": "",
+                    "createdAt": "2025-01-03T08:02:36.598Z",
+                    "updatedAt": "2025-01-03T08:02:36.598Z",
+                    "__v": 0
+                } other optional fields will be added if they were included in the request
+
+            }
+            
+        ```
+
