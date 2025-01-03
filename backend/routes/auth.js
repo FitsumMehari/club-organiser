@@ -129,7 +129,10 @@ router.put("/updateprofile", verifyToken, async(req, res, next) => {
                 expiresIn: "7d",
             }
         );
-        res.status(201).json({ message: "Update Successful!" });
+        res.status(201).json({
+            message: "Update Successful!",
+            accessToken,
+        });
     } catch (error) {
         next(error);
     }
