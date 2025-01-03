@@ -6,6 +6,8 @@ dotenv.config();
 const Club = require("../models/Club");
 const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 
+const nodemailer = require("nodemailer");
+
 // Add New Club
 router.post("/new", verifyTokenAndAuthorization, async(req, res, next) => {
     if (!req.body.name ||
@@ -46,7 +48,7 @@ router.post("/new", verifyTokenAndAuthorization, async(req, res, next) => {
 });
 
 // Get All Clubs
-router.get("/all", verifyTokenAndAuthorization, async(req, res, next) => {
+router.get("/all", async(req, res, next) => {
     try {
         const allClubs = await Club.find({});
         res.status(200).json(allClubs);
@@ -85,7 +87,7 @@ router.put("/update", verifyToken, async(req, res, next) => {
             location: req.body.location,
         });
 
-        const newValues = await Club.findOne(req.body.id)
+        const newValues = await Club.findOne(req.body.id);
 
         res.status(200).json({
             message: "Update Successful!",
@@ -94,6 +96,70 @@ router.put("/update", verifyToken, async(req, res, next) => {
     } catch (error) {
         next(error);
     }
+});
+
+// Update A CLub By Club ID When A Request To Be A Member is Accepted By The Club Managers
+router.put("/approvemembership", verifyToken, async(req, res, next) => {
+    try {
+        const club = await Club.findById(req.body._id);
+
+        const mailOptions = {
+            from: process.env.OTP_EMAIL,
+            to: req.body.email,
+            subject: "Membership Request",
+            text: `Your request to join ${club.name} club has been approved by the managers.`,
+        };
+
+        const pendingRequest = club.members.find(member => member.email === req.body.email);
+        if (pendingRequest) {
+            pendingRequest.status = "accepted"
+            await club.save()
+            await transporter.sendMail(mailOptions);
+            return res.status(400).json({ message: 'Membership request approved!' });
+        }
+
+
+        res.status(400).json({
+            message: "Request not found!",
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Update A CLub By Club ID When A Request To Be A Member is Accepted By The Club Managers
+router.put("/requestmembership", async(req, res, next) => {
+    try {
+        const club = await Club.findById(req.body._id);
+
+        const existingRequest = club.members.find(member => member.email === req.body.email);
+        if (existingRequest) {
+            return res.status(400).json({ message: 'Member request already exists' });
+        }
+
+        club.members.push({ name: req.body.name, email: req.body.email, status: "pending" });
+        await club.save();
+
+        res.status(201).json({ message: 'Member request submitted successfully' });
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+
+// Send confirmation via email
+const transporter = nodemailer.createTransport({
+    // Configure your email provider here
+    service: "gmail",
+    auth: {
+        user: process.env.OTP_EMAIL,
+        pass: process.env.OTP_EMAIL_PASSWORD,
+    },
+    tls: {
+        rejectUnauthorized: false,
+    },
 });
 
 // Delete A CLub By Club ID
