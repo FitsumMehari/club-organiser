@@ -174,7 +174,7 @@
 - ## For adding a new club
 
   ```
-      PUT club/new
+      POST club/new
   ```
 
   ### request parameters:
@@ -218,7 +218,7 @@
                     "category": "",
                     "description": "",
                     "managers": [
-                        "_id of the users"
+                        "_id of the users set us managers"
                     ],
                     "events": [],
                     "members": [],
@@ -229,4 +229,51 @@
                     "__v": 0
                 }
             }  other optional fields will be added if they were included in the request
+        ```
+
+- ## For getting all clubs
+
+  ```
+      GET club/all
+  ```
+
+  ### request parameters:
+
+   - Headers:
+
+    ```
+
+        "token": "bearer {received token of a user with userType=admin}"
+
+
+    ```
+
+  - Body:
+    ```
+        {
+           not required
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            [
+                {
+                    "_id": "",
+                    "name": "",
+                    "category": "",
+                    "description": "",
+                    "managers": [
+                        "_id of users set us managers"
+                    ],
+                    "events": [],
+                    "members": [],
+                    "status": "",
+                    "createdAt": "2025-01-03T08:02:36.598Z",
+                    "updatedAt": "2025-01-03T08:02:36.598Z",
+                    "__v": 0
+                } other optional fields will be added if they were included in the request
+            ]  
         ```
