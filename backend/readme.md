@@ -143,7 +143,7 @@
             This endpoint does not have any responses. It will send OTP to the provided email which will then be used to verify for later routes.
         ```
 
-- ## For getting the security question
+- ## For resetting password
 
   ```
       PUT auth/reset-password
@@ -167,4 +167,66 @@
             {
                 "message": "Password reset successfully"
             }
+        ```
+
+### ---------------------------------------------------------------------------------
+
+- ## For adding a new club
+
+  ```
+      PUT club/new
+  ```
+
+  ### request parameters:
+
+   - Headers:
+
+    ```
+
+        "token": "bearer {received token of a user with userType=admin}"
+
+
+    ```
+
+  - Body:
+    ```
+        {
+            "name": "",
+            "description": "",
+            "category": "",
+            "managers": "{_id of the users that are supposed to be managers of the club}",
+            "status": "",
+            
+            optional values include the following:
+
+            "events: "{array of _id of events hosted by the club}",
+            "location: "",
+            "members: "{array of object in the form of {"name": "", "email": "" }}",
+            "logo: "{url of an image file}",
+            
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "message": "Club Saved Successfully!",
+                "savedClub": {
+                    "name": "",
+                    "category": "",
+                    "description": "",
+                    "managers": [
+                        "_id of the users"
+                    ],
+                    "events": [],
+                    "members": [],
+                    "status": "",
+                    "_id": "6777999c82ea2e360ebde0a2",
+                    "createdAt": "2025-01-03T08:02:36.598Z",
+                    "updatedAt": "2025-01-03T08:02:36.598Z",
+                    "__v": 0
+                }
+            }  other optional fields will be added if they were included in the request
         ```
