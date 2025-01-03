@@ -27,7 +27,7 @@ const ClubSchema = new mongoose.Schema({
     events: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "event",
-        required: true
+        required: false
     }, ],
     location: {
         type: String,
