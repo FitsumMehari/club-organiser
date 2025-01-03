@@ -436,3 +436,65 @@
             }            
         ```
 
+- ## For requesting to join a single club by club ID
+
+  ```
+      PUT club/requestmembership
+  ```
+
+  ### request parameters:
+
+  - Body:
+
+    ```
+        { 
+            "_id": "club id",
+            "name": "name of the person requesting to join the club",
+            "email": "working email address of the person requesting to join the club"
+            
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "message": "Member request submitted successfully"
+            }            
+        ```
+
+- ## For approving requests of people to join a single club by club ID
+
+  ```
+      PUT club/approvemembership
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "token": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        { 
+            "_id": "club id",
+            "email": "working email address of the person requesting to join the club"
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "message": "Membership request approved!"
+            }            
+        ```
