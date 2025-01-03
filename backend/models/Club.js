@@ -22,18 +22,26 @@ const ClubSchema = new mongoose.Schema({
     managers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
+        required: true
+    }, ],
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "event",
+        required: true
     }, ],
     location: {
         type: String,
-        required: true,
+        required: false,
     },
     members: [{
-        name: String,
-        email: String,
+        name: { type: String, required: false, },
+        email: { type: String, required: false, },
     }, ],
     status: {
         type: String,
         enum: ["open", "closed"],
+        default: "open",
+        required: true,
     },
 }, {
     timestamps: true,
