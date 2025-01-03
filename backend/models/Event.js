@@ -38,6 +38,8 @@ const EventSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ["open", "closed"],
+        default: "open",
+        required: true,
     },
 }, {
     timestamps: true,
