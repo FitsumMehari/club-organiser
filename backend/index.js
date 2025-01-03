@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 const authRoute = require("./routes/auth");
+const clubRoute = require("./routes/club");
 
 // Database connector code
 mongoose
@@ -28,6 +29,7 @@ mongoose
 
 // Auth route path
 app.use("/auth", authRoute);
+app.use("/club", clubRoute);
 
 //ROUTE NOT FOUND
 app.use((req, res, next) => {
