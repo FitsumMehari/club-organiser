@@ -36,6 +36,7 @@ const ClubSchema = new mongoose.Schema({
     members: [{
         name: { type: String, required: false, },
         email: { type: String, required: false, },
+        status: { type: String, enum: ["pending", "accepted"], default: "pending" }
     }, ],
     status: {
         type: String,
