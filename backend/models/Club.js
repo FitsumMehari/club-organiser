@@ -19,17 +19,13 @@ const ClubSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    organisers: [{
+    managers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
     }, ],
     location: {
         type: String,
         required: true,
-    },
-    date: {
-        type: Date,
-        required: false,
     },
     members: [{
         name: String,
