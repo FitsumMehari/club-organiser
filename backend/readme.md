@@ -12,6 +12,9 @@
 # Notice:
 
 - Profile pic is sent as an address to a cloud file storage, and not the actual picture.
+- Start point is index.js
+- Build it by ``` npm i ``` first
+- Run it by ``` node index.js ```
 
 # Endpoints
 
