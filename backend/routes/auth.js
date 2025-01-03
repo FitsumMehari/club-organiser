@@ -19,9 +19,7 @@ router.post("/register", async(req, res, next) => {
         !req.body.password ||
         !req.body.email ||
         !req.body.phone ||
-        !req.body.userType ||
-        !req.body.clubs ||
-        !req.body.profilePic
+        !req.body.userType
     ) {
         res.status(200).json({ message: "Please fill the required inputs!" });
     } else {
@@ -107,13 +105,14 @@ router.post("/login", async(req, res, next) => {
 router.put("/updateprofile", verifyToken, async(req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(req.body._id, {
-            username: user.username,
-            email: user.email,
-            phone: user.phone,
-            userType: user.userType,
-            clubs: user.clubs,
-            profilePic: user.profilePic,
+            username: req.body.username,
+            email: req.body.email,
+            phone: req.body.phone,
+            userType: req.body.userType,
+            clubs: req.body.clubs,
+            profilePic: req.body.profilePic,
         });
+
 
         const accessToken = jwt.sign({
                 id: user._id,
