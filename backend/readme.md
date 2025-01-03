@@ -11,7 +11,7 @@
 
 # Notice:
 
-- Profile pic is sent an address to a cloud file storage, and not the actual picture.
+- Profile pic is sent as an address to a cloud file storage, and not the actual picture.
 
 # Endpoints
 
