@@ -496,5 +496,5 @@
         ```
             {
                 "message": "Membership request approved!"
-            }            
+            }  If request is approved, the person will receive an email informing them about the approval.           
         ```
