@@ -9,7 +9,7 @@ const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 const nodemailer = require("nodemailer");
 
 // Add New Club
-router.post("/new", verifyTokenAndAuthorization, async(req, res, next) => {
+router.post("/", verifyTokenAndAuthorization, async(req, res, next) => {
     if (!req.body.name ||
         !req.body.category ||
         !req.body.description ||
@@ -48,7 +48,7 @@ router.post("/new", verifyTokenAndAuthorization, async(req, res, next) => {
 });
 
 // Get All Clubs
-router.get("/all", async(req, res, next) => {
+router.get("/", async(req, res, next) => {
     try {
         const allClubs = await Club.find({});
         res.status(200).json(allClubs);
@@ -58,14 +58,12 @@ router.get("/all", async(req, res, next) => {
 });
 
 // Get Single Club By ID Of Manager
-router.get("/bymanagerid", verifyToken, async(req, res, next) => {
+router.get("/:clubID", async(req, res, next) => {
     if (!req.user._id) {
         res.status(400).json({ message: "Invalid managerID!" });
     } else {
         try {
-            const existingClub = await Club.findOne({
-                managers: req.user._id,
-            });
+            const existingClub = await Club.findById(req.params.clubID)
             res.status(200).json(existingClub);
         } catch (error) {
             next(error);
@@ -74,9 +72,9 @@ router.get("/bymanagerid", verifyToken, async(req, res, next) => {
 });
 
 // Update A CLub By Club ID
-router.put("/update", verifyToken, async(req, res, next) => {
+router.put("/:clubID", verifyToken, async(req, res, next) => {
     try {
-        const updatedClub = await Club.findByIdAndUpdate(req.body._id, {
+        const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
             name: req.body.name,
             category: req.body.category,
             description: req.body.description,
@@ -163,9 +161,9 @@ const transporter = nodemailer.createTransport({
 });
 
 // Delete A CLub By Club ID
-router.delete("/delete", verifyToken, async(req, res, next) => {
+router.delete("/:clubID", verifyToken, async(req, res, next) => {
     try {
-        const updatedClub = await Club.findByIdAndDelete(req.body._id);
+        const updatedClub = await Club.findByIdAndDelete(req.params.clubID);
 
         res.status(201).json({
             message: "Delete Successful!",
