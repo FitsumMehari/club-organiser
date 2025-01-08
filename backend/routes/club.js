@@ -9,7 +9,7 @@ const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 const nodemailer = require("nodemailer");
 
 // Add New Club
-router.post("/new", verifyTokenAndAuthorization, async(req, res, next) => {
+router.post("/", verifyTokenAndAuthorization, async(req, res, next) => {
     if (!req.body.name ||
         !req.body.category ||
         !req.body.description ||
@@ -48,7 +48,7 @@ router.post("/new", verifyTokenAndAuthorization, async(req, res, next) => {
 });
 
 // Get All Clubs
-router.get("/all", async(req, res, next) => {
+router.get("/", async(req, res, next) => {
     try {
         const allClubs = await Club.find({});
         res.status(200).json(allClubs);
@@ -58,14 +58,12 @@ router.get("/all", async(req, res, next) => {
 });
 
 // Get Single Club By ID Of Manager
-router.get("/bymanagerid", verifyToken, async(req, res, next) => {
-    if (!req.user._id) {
-        res.status(400).json({ message: "Invalid managerID!" });
+router.get("/:clubID", async(req, res, next) => {
+    if (!req.params.clubID) {
+        res.status(400).json({ message: "Invalid club ID!" });
     } else {
         try {
-            const existingClub = await Club.findOne({
-                managers: req.user._id,
-            });
+            const existingClub = await Club.findById(req.params.clubID)
             res.status(200).json(existingClub);
         } catch (error) {
             next(error);
@@ -74,9 +72,9 @@ router.get("/bymanagerid", verifyToken, async(req, res, next) => {
 });
 
 // Update A CLub By Club ID
-router.put("/update", verifyToken, async(req, res, next) => {
+router.put("/:clubID", verifyToken, async(req, res, next) => {
     try {
-        const updatedClub = await Club.findByIdAndUpdate(req.body._id, {
+        const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
             name: req.body.name,
             category: req.body.category,
             description: req.body.description,
@@ -128,44 +126,33 @@ router.put("/approvemembership", verifyToken, async(req, res, next) => {
 });
 
 // Update A CLub By Club ID When A Request To Be A Member is Accepted By The Club Managers
-router.put("/requestmembership", async(req, res, next) => {
-    try {
-        const club = await Club.findById(req.body._id);
+router.post("/requestmembership/:clubID", async(req, res, next) => {
+    if (req.params.clubID) {
+        try {
+            const club = await Club.findById(req.params.clubID);
 
-        const existingRequest = club.members.find(member => member.email === req.body.email);
-        if (existingRequest) {
-            return res.status(400).json({ message: 'Member request already exists' });
+            const existingRequest = club.members.find(member => member.email === req.body.email);
+            if (existingRequest) {
+                return res.status(400).json({ message: 'Member request already exists' });
+            }
+
+            club.members.push({ name: req.body.name, email: req.body.email, status: "pending" });
+            await club.save();
+
+            res.status(201).json({ message: 'Member request submitted successfully' });
+
+        } catch (error) {
+            next(error);
         }
-
-        club.members.push({ name: req.body.name, email: req.body.email, status: "pending" });
-        await club.save();
-
-        res.status(201).json({ message: 'Member request submitted successfully' });
-
-    } catch (error) {
-        next(error);
+    } else {
+        res.status(400).json({ message: "Invalid club ID!" });
     }
 });
 
-
-
-// Send confirmation via email
-const transporter = nodemailer.createTransport({
-    // Configure your email provider here
-    service: "gmail",
-    auth: {
-        user: process.env.OTP_EMAIL,
-        pass: process.env.OTP_EMAIL_PASSWORD,
-    },
-    tls: {
-        rejectUnauthorized: false,
-    },
-});
-
 // Delete A CLub By Club ID
-router.delete("/delete", verifyToken, async(req, res, next) => {
+router.delete("/:clubID", verifyToken, async(req, res, next) => {
     try {
-        const updatedClub = await Club.findByIdAndDelete(req.body._id);
+        await Club.findByIdAndDelete(req.params.clubID);
 
         res.status(201).json({
             message: "Delete Successful!",

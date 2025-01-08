@@ -3,7 +3,8 @@ const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const nodemailer = require("nodemailer");
+const transporter = require("./transporter")
+const verifyOTP = require("./verifyOTP")
 
 // const jwtPrivateKey = fs.readFileSync('./rsa.pem', 'utf8');
 const jwtPrivateKey = process.env.JWTKEY;
@@ -201,39 +202,6 @@ function generateOTP() {
     return otp;
 }
 
-// Send OTP via email
-const transporter = nodemailer.createTransport({
-    // Configure your email provider here
-    service: "gmail",
-    auth: {
-        user: process.env.OTP_EMAIL,
-        pass: process.env.OTP_EMAIL_PASSWORD,
-    },
-    tls: {
-        rejectUnauthorized: false,
-    },
-});
-
-// Verify OTP Route
-const verifyOTP = async(req, res, next) => {
-    const { email, otp } = req.body;
-
-    try {
-        const existingUser = await User.findOne({ email });
-        if (!existingUser) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        if (existingUser.generatedOTP !== otp) {
-            return res.status(400).json({ message: "Invalid or expired OTP" });
-        }
-
-        // res.json({ message: 'OTP verified' });
-        next();
-    } catch (error) {
-        res.status(500).json({ message: "Error verifying OTP" });
-    }
-};
 
 router.post("/reset-password", verifyOTP, async(req, res) => {
     const { email, newPassword } = req.body;
