@@ -13,7 +13,7 @@
 
 - Profile pic is sent as an address to a cloud file storage, and not the actual picture.
 - Start point is index.js
-- Build it by ``` npm i ``` first
+- Add packages by ``` npm i ``` or ``` yarn ``` first
 - Run it by ``` node index.js ```
 
 # Endpoints
@@ -41,7 +41,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -79,7 +79,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -100,7 +100,7 @@
 
     ```
 
-        "token": "bearer {received token}"
+        "authorization": "bearer {received token}"
 
 
     ```
@@ -109,7 +109,7 @@
 
     ```
         {
-            "_id": "{recieved id}",
+            "_id": "{received id}",
             username: "",
             email: "",
             phone: "",
@@ -120,7 +120,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -146,7 +146,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             This endpoint does not have any responses. It will send OTP to the provided email which will then be used to verify for later routes.
@@ -171,7 +171,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -193,7 +193,7 @@
 
   ```
 
-      "token": "bearer {received token of a user with userType=admin}"
+      "authorization": "bearer {received token of a user with userType=admin}"
 
 
   ```
@@ -219,7 +219,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -259,7 +259,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             [
@@ -298,7 +298,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -332,7 +332,7 @@
 
   ```
 
-      "token": "bearer {received token of a user with userType=organiser}"
+      "authorization": "bearer {received token of a user with userType=organiser}"
 
 
   ```
@@ -346,7 +346,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -379,7 +379,7 @@
 
   ```
 
-      "token": "bearer {received token of a user with userType=organiser}"
+      "authorization": "bearer {received token of a user with userType=organiser}"
 
 
   ```
@@ -406,7 +406,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -443,7 +443,7 @@
 
   ```
 
-      "token": "bearer {received token of a user with userType=organiser}"
+      "authorization": "bearer {received token of a user with userType=organiser}"
 
 
   ```
@@ -458,7 +458,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -485,7 +485,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
@@ -505,7 +505,7 @@
 
   ```
 
-      "token": "bearer {received token of a user with userType=organiser}"
+      "authorization": "bearer {received token of a user with userType=organiser}"
 
 
   ```
@@ -520,7 +520,7 @@
 
     ```
 
-  ### response format:
+  ### response:
 
         ```
             {
