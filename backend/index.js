@@ -16,6 +16,7 @@ app.use(express.json());
 
 const authRoute = require("./routes/auth");
 const clubRoute = require("./routes/club");
+const managerRoute = require("./routes/manager");
 
 // Database connector code
 mongoose
@@ -29,7 +30,8 @@ mongoose
 
 // Auth route path
 app.use("/auth", authRoute);
-app.use("/club", clubRoute);
+app.use("/clubs", clubRoute);
+app.use("/managers", managerRoute);
 
 //ROUTE NOT FOUND
 app.use((req, res, next) => {
