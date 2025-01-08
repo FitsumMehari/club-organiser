@@ -179,7 +179,7 @@
             }
         ```
 
-### ---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 
 - ## add a new club
 
@@ -586,4 +586,31 @@
                     "__v": 0
                 }
             }  other optional fields will be added if they were included in the request
+        ```
+
+- ## request to reserve a ticket to an event event ID
+
+  ```
+      POST events/reserve/:eventID
+  ```
+
+  ### request parameters:
+
+  - Body:
+
+    ```
+        { 
+            "name": "name of the person requesting to join the club",
+            "email": "working email address of the person requesting to join the club"
+            
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Member request submitted successfully"
+            }            
         ```
