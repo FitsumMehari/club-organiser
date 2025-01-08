@@ -32,8 +32,9 @@ const EventSchema = new mongoose.Schema({
         required: false,
     },
     attendees: [{
-        name: String,
-        email: String,
+        name: { type: String, required: false, },
+        email: { type: String, required: false, },
+        status: { type: String, enum: ["pending", "accepted"], default: "pending" }
     }, ],
     status: {
         type: String,
