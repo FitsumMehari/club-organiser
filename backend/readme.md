@@ -528,3 +528,62 @@
             }            
         ```
         If request is approved, the person will receive an email informing them about the approval. 
+
+---------------------------------------------------------------------------------------------------
+
+- ## add a new event
+
+  ```
+      POST managers/club/events/:clubID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=admin}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+            "name": "",
+            "category": "",
+            "description": "",
+            "status": "",
+
+            optional values include the following:
+
+            "date": "{Date}",
+            "location": "",
+            "attendees": "{array of object in the form of {"name": "", "email": "" }}",
+            "logo: "{url of an image file}",
+
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Event Created Successfully!",
+                "savedClub": {
+                    "name": "",
+                    "category": "",
+                    "description": "",
+                    "organiser": "",
+                    "attendees": [],
+                    "status": "",
+                    "_id": "6777999c82ea2e360ebde0a2",
+                    "createdAt": "2025-01-03T08:02:36.598Z",
+                    "updatedAt": "2025-01-03T08:02:36.598Z",
+                    "__v": 0
+                }
+            }  other optional fields will be added if they were included in the request
+        ```
