@@ -18,7 +18,7 @@
 
 # Endpoints
 
-- ## For sign up
+- ## sign up
 
   ```
       POST /auth/register
@@ -61,7 +61,7 @@
             }
         ```
 
-- ## For sign in
+- ## sign in
 
   ```
       POST /auth/login
@@ -88,7 +88,7 @@
             }
         ```
 
-- ## For update profile
+- ## update profile
 
   ```
       PUT /auth/updateprofile
@@ -129,7 +129,7 @@
             }
         ```
 
-- ## For change password
+- ##  reset password initial
 
   ```
       PUT auth/forgot-password
@@ -152,7 +152,7 @@
             This endpoint does not have any responses. It will send OTP to the provided email which will then be used to verify for later routes.
         ```
 
-- ## For resetting password
+- ## reset password final
 
   ```
       PUT auth/reset-password
@@ -181,10 +181,10 @@
 
 ### ---------------------------------------------------------------------------------
 
-- ## For adding a new club
+- ## add a new club
 
   ```
-      POST club/new
+      POST clubs/
   ```
 
   ### request parameters:
@@ -242,22 +242,13 @@
             }  other optional fields will be added if they were included in the request
         ```
 
-- ## For getting all clubs
+- ## get all clubs
 
   ```
-      GET club/all
+      GET clubs/
   ```
 
   ### request parameters:
-
-  - Headers:
-
-  ```
-
-      "token": "bearer {received token of a user with userType=admin}"
-
-
-  ```
 
   - Body:
 
@@ -290,10 +281,49 @@
             ]
         ```
 
-- ## For single club by manager ID
+- ## get club based on club ID
 
   ```
-      GET club/bymanagerid
+      GET clubs/:clubID
+  ```
+
+  ### request parameters:
+
+  - Body:
+
+    ```
+        {
+           not required
+        }
+
+    ```
+
+  ### response format:
+
+        ```
+            {
+                "_id": "",
+                "name": "",
+                "category": "",
+                "description": "",
+                "managers": [
+                    "_id of users set us managers"
+                ],
+                "events": [],
+                "members": [],
+                "status": "",
+                "createdAt": "2025-01-03T08:02:36.598Z",
+                "updatedAt": "2025-01-03T08:02:36.598Z",
+                "__v": 0
+            } other optional fields will be added if they were included in the request
+
+        ```
+
+
+- ## get club based on manager ID
+
+  ```
+      GET manager/club
   ```
 
   ### request parameters:
@@ -337,10 +367,10 @@
 
         ```
 
-- ## For updating a single club by club ID
+- ## update a single club by club ID
 
   ```
-      PUT club/update
+      PUT clubs/:clubID
   ```
 
   ### request parameters:
@@ -404,7 +434,7 @@
 - ## For deleting a single club by club ID
 
   ```
-      DELETE club/delete
+      DELETE clubs/:clubID
   ```
 
   ### request parameters:
@@ -439,7 +469,7 @@
 - ## For requesting to join a single club by club ID
 
   ```
-      PUT club/requestmembership
+      PUT clubs/requestmembership
   ```
 
   ### request parameters:
@@ -467,7 +497,7 @@
 - ## For approving requests of people to join a single club by club ID
 
   ```
-      PUT club/approvemembership
+      PUT clubs/approvemembership
   ```
 
   ### request parameters:
@@ -496,5 +526,6 @@
         ```
             {
                 "message": "Membership request approved!"
-            }  If request is approved, the person will receive an email informing them about the approval.           
+            }            
         ```
+        If request is approved, the person will receive an email informing them about the approval. 
