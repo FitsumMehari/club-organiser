@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const nodemailer = require("nodemailer");
+const transporter = require("./transporter")
 
 // const jwtPrivateKey = fs.readFileSync('./rsa.pem', 'utf8');
 const jwtPrivateKey = process.env.JWTKEY;
@@ -201,18 +202,7 @@ function generateOTP() {
     return otp;
 }
 
-// Send OTP via email
-const transporter = nodemailer.createTransport({
-    // Configure your email provider here
-    service: "gmail",
-    auth: {
-        user: process.env.OTP_EMAIL,
-        pass: process.env.OTP_EMAIL_PASSWORD,
-    },
-    tls: {
-        rejectUnauthorized: false,
-    },
-});
+
 
 // Verify OTP Route
 const verifyOTP = async(req, res, next) => {
