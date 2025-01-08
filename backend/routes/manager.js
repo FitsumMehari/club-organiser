@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const Club = require("../models/Club");
+const Event = require("../models/Event");
 const { verifyToken } = require("./verifyToken");
 
 const transporter = require("./transporter")
@@ -58,6 +59,50 @@ router.put("/club/approvemembership/:clubID", verifyToken, async(req, res, next)
 
     }
 });
+
+// Add a new event
+router.post("/club/events/:clubID", verifyToken, async(req, res, next) => {
+    if (req.params.clubID) {
+        if (!req.body.name ||
+            !req.body.category ||
+            !req.body.description ||
+            !req.body.status
+        ) {
+            res.status(200).json({ message: "Please fill the required inputs!" });
+        } else {
+
+            const newEvent = new Event({
+                logo: req.body.logo,
+                name: req.body.name,
+                category: req.body.category,
+                description: req.body.description,
+                organiser: req.params.clubID,
+                location: req.body.location,
+                date: req.body.date,
+                attendees: req.body.attendees,
+                status: req.body.status,
+            });
+            try {
+                const savedEvent = await newEvent.save();
+
+                if (savedEvent) {
+                    const club = await Club.findById(req.params.clubID);
+                    club.events.push(savedEvent._id);
+                    console.log(savedEvent._id);
+                    club.save()
+                    res.status(201).json({ message: "Event Created Successfully!", savedEvent });
+                } else {
+                    res.status(400).json({ "message": "Not Saved!" })
+                }
+            } catch (err) {
+                return next(err);
+            }
+        }
+    } else {
+        res.status(400).json({ message: "Invalid club ID!" });
+
+    }
+})
 
 
 
