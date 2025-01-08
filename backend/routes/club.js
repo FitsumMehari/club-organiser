@@ -59,8 +59,8 @@ router.get("/", async(req, res, next) => {
 
 // Get Single Club By ID Of Manager
 router.get("/:clubID", async(req, res, next) => {
-    if (!req.user._id) {
-        res.status(400).json({ message: "Invalid managerID!" });
+    if (!req.params.clubID) {
+        res.status(400).json({ message: "Invalid club ID!" });
     } else {
         try {
             const existingClub = await Club.findById(req.params.clubID)
@@ -126,44 +126,33 @@ router.put("/approvemembership", verifyToken, async(req, res, next) => {
 });
 
 // Update A CLub By Club ID When A Request To Be A Member is Accepted By The Club Managers
-router.put("/requestmembership", async(req, res, next) => {
-    try {
-        const club = await Club.findById(req.body._id);
+router.post("/requestmembership/:clubID", async(req, res, next) => {
+    if (req.params.clubID) {
+        try {
+            const club = await Club.findById(req.params.clubID);
 
-        const existingRequest = club.members.find(member => member.email === req.body.email);
-        if (existingRequest) {
-            return res.status(400).json({ message: 'Member request already exists' });
+            const existingRequest = club.members.find(member => member.email === req.body.email);
+            if (existingRequest) {
+                return res.status(400).json({ message: 'Member request already exists' });
+            }
+
+            club.members.push({ name: req.body.name, email: req.body.email, status: "pending" });
+            await club.save();
+
+            res.status(201).json({ message: 'Member request submitted successfully' });
+
+        } catch (error) {
+            next(error);
         }
-
-        club.members.push({ name: req.body.name, email: req.body.email, status: "pending" });
-        await club.save();
-
-        res.status(201).json({ message: 'Member request submitted successfully' });
-
-    } catch (error) {
-        next(error);
+    } else {
+        res.status(400).json({ message: "Invalid club ID!" });
     }
-});
-
-
-
-// Send confirmation via email
-const transporter = nodemailer.createTransport({
-    // Configure your email provider here
-    service: "gmail",
-    auth: {
-        user: process.env.OTP_EMAIL,
-        pass: process.env.OTP_EMAIL_PASSWORD,
-    },
-    tls: {
-        rejectUnauthorized: false,
-    },
 });
 
 // Delete A CLub By Club ID
 router.delete("/:clubID", verifyToken, async(req, res, next) => {
     try {
-        const updatedClub = await Club.findByIdAndDelete(req.params.clubID);
+        await Club.findByIdAndDelete(req.params.clubID);
 
         res.status(201).json({
             message: "Delete Successful!",
