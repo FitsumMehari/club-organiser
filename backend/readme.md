@@ -466,10 +466,10 @@
             }            
         ```
 
-- ## For requesting to join a single club by club ID
+- ## request to join a single club by club ID
 
   ```
-      PUT clubs/requestmembership
+      POST clubs/requestmembership/:clubID
   ```
 
   ### request parameters:
@@ -478,7 +478,6 @@
 
     ```
         { 
-            "_id": "club id",
             "name": "name of the person requesting to join the club",
             "email": "working email address of the person requesting to join the club"
             
@@ -494,10 +493,10 @@
             }            
         ```
 
-- ## For approving requests of people to join a single club by club ID
+- ## approve membership requests of people to join a single club by club ID
 
   ```
-      PUT clubs/approvemembership
+      PUT managers/club/approvemembership/:clubID
   ```
 
   ### request parameters:
