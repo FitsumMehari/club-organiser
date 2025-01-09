@@ -721,3 +721,38 @@
 
         ```
 
+
+- ## get membership requests to a club based on club ID
+
+  ```
+      GET managers/club/membershiprequests/:clubID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+    ```
+        {
+           "authorization": "Bearer {token}"
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Membership requests found",
+                "members": [
+                    {
+                        "name": "",
+                        "email": "",
+                        "status": "",
+                        "_id": "677f87d63d85401a40daba8f"
+                    }
+                ]
+            }
+
+        ```
+
