@@ -649,3 +649,39 @@
                 "message": "Delete Successful!"
             }
         ```
+
+- ## get all events
+
+  ```
+      GET events/
+  ```
+
+  ### request parameters:
+
+  - Body:
+
+    ```
+        {
+           not required
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            [
+                {
+                    "_id": "",
+                    "name": "",
+                    "category": "",
+                    "description": "",
+                    "organiser": "_id of club to host the event",
+                    "attendees": [],
+                    "status": "",
+                    "createdAt": "2025-01-03T08:02:36.598Z",
+                    "updatedAt": "2025-01-03T08:02:36.598Z",
+                    "__v": 0
+                } other optional fields will be added if they were included in the request
+            ]
+        ```
