@@ -323,7 +323,7 @@
 - ## get club based on manager ID
 
   ```
-      GET manager/club
+      GET managers/club
   ```
 
   ### request parameters:
@@ -685,3 +685,39 @@
                 } other optional fields will be added if they were included in the request
             ]
         ```
+
+- ## get event based on event ID
+
+  ```
+      GET events/:eventID
+  ```
+
+  ### request parameters:
+
+  - Body:
+
+    ```
+        {
+           not required
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "_id": "",
+                "name": "",
+                "category": "",
+                "description": "",
+                "organiser": "_id of users set us managers",
+                "attendees": [],
+                "status": "",
+                "createdAt": "2025-01-03T08:02:36.598Z",
+                "updatedAt": "2025-01-03T08:02:36.598Z",
+                "__v": 0
+            } other optional fields will be added if they were included in the request
+
+        ```
+
