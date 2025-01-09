@@ -798,7 +798,7 @@
 - ## get event reservation requests to a an event based on event ID
 
   ```
-      GET managers/club/events/event/reservations/:eventID
+      GET managers/club/event/reservations/:eventID
   ```
 
   ### request parameters:
