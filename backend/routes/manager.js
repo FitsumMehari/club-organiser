@@ -104,6 +104,29 @@ router.post("/club/events/:clubID", verifyToken, async(req, res, next) => {
     }
 })
 
+// Delete A event By event ID
+router.delete("/club/events/:eventID", verifyToken, async(req, res, next) => {
+    try {
+        await Event.findByIdAndDelete(req.params.eventID);
+
+        const clubs = await Club.find()
+        clubs.forEach(club => {
+            club.events.forEach(event => {
+                if (event == req.params.eventID) {
+                    club.events.splice(club.events.indexOf(event), 1)
+                    club.save();
+                }
+
+            })
+        })
+
+        res.status(201).json({
+            message: "Delete Successful!",
+        });
+    } catch (error) {
+        next(error);
+    }
+});
 
 
 module.exports = router;

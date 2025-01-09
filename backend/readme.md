@@ -614,3 +614,38 @@
                 "message": "Member request submitted successfully"
             }            
         ```
+
+- ## delete a single event by event ID
+
+  ```
+      DELETE managers/club/events/:eventID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+            empty
+
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Delete Successful!"
+            }
+        ```
