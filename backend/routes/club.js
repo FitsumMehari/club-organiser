@@ -57,7 +57,7 @@ router.get("/", async(req, res, next) => {
     }
 });
 
-// Get Single Club By ID Of Manager
+// Get Single Club By ID Of Club
 router.get("/:clubID", async(req, res, next) => {
     if (!req.params.clubID) {
         res.status(400).json({ message: "Invalid club ID!" });

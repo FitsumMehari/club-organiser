@@ -35,5 +35,19 @@ router.get("/", async(req, res, next) => {
     }
 });
 
+// Get Single event By ID Of event
+router.get("/:eventID", async(req, res, next) => {
+    if (!req.params.eventID) {
+        res.status(400).json({ message: "Invalid event ID!" });
+    } else {
+        try {
+            const existingEvent = await Event.findById(req.params.eventID)
+            res.status(200).json(existingEvent);
+        } catch (error) {
+            next(error);
+        }
+    }
+});
+
 
 module.exports = router;
