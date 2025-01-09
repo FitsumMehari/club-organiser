@@ -25,4 +25,15 @@ router.post("/reserve/:eventID", async(req, res, next) => {
     }
 });
 
+// Get All Events
+router.get("/", async(req, res, next) => {
+    try {
+        const allEvents = await Event.find({});
+        res.status(200).json(allEvents);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 module.exports = router;
