@@ -829,3 +829,76 @@
 
         ```
 
+
+- ## approve reservation requests of people to join a single event by event ID
+
+  ```
+      PUT managers/club/event/approvereservation/:eventID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        { 
+            "email": "working email address of the person requesting to join the club"
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Membership request approved!"
+            }            
+        ```
+        If request is approved, the person will receive an email informing them about the approval. 
+
+
+- ## decline reservation requests of people to join a single event by event ID
+
+  ```
+      PUT managers/club/event/declinereservation/:eventID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        { 
+            "email": "working email address of the person requesting to join the club"
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Membership request declined!"
+            }            
+        ```
+        If request is approved, the person will receive an email informing them about the approval. 
+
+

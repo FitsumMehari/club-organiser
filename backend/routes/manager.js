@@ -216,4 +216,77 @@ router.delete("/club/events/:eventID", verifyToken, async(req, res, next) => {
     }
 });
 
+// Update an event By event ID When A Request is Accepted By The Club Managers
+router.put(
+    "/club/event/approvereservation/:eventID",
+    verifyToken,
+    async(req, res, next) => {
+        if (req.params.eventID) {
+            try {
+                const event = await Event.findById(req.params.eventID);
+
+                const mailOptions = {
+                    from: process.env.OTP_EMAIL,
+                    to: req.body.email,
+                    subject: "Membership Request",
+                    text: `Your request to reserve a ticket ${event.name} event has been approved by the managers.`,
+                };
+
+                const pendingRequest = event.attendees.find(
+                    (attendee) => attendee.email === req.body.email
+                );
+                if (pendingRequest) {
+                    pendingRequest.status = "accepted";
+                    await event.save();
+                    await transporter.sendMail(mailOptions);
+                    return res
+                        .status(200)
+                        .json({ message: "Reservation request approved!" });
+                }
+
+                res.status(400).json({
+                    message: "Request not found!",
+                });
+            } catch (error) {
+                next(error);
+            }
+        } else {
+            res.status(400).json({ message: "Invalid event ID!" });
+        }
+    }
+);
+
+// Update A CLub By Club ID When A Request To Be A Member is Declined By The Club Managers
+router.put(
+    "/club/event/declinereservation/:eventID",
+    verifyToken,
+    async(req, res, next) => {
+        if (req.params.eventID) {
+            try {
+                const event = await Event.findById(req.params.eventID);
+
+                const pendingRequest = event.attendees.find(
+                    (attendee) => attendee.email === req.body.email
+                );
+                if (pendingRequest) {
+                    event.attendees.splice(event.attendees.indexOf(pendingRequest), 1)
+                    await event.save();
+                    return res
+                        .status(200)
+                        .json({ message: "Reservation request declined!" });
+                }
+
+                res.status(400).json({
+                    message: "Request not found!",
+                });
+            } catch (error) {
+                next(error);
+            }
+        } else {
+            res.status(400).json({ message: "Invalid club ID!" });
+        }
+    }
+);
+
+
 module.exports = router;
