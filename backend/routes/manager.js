@@ -65,6 +65,38 @@ router.put(
     }
 );
 
+// Update A CLub By Club ID When A Request To Be A Member is Declined By The Club Managers
+router.put(
+    "/club/declinemembership/:clubID",
+    verifyToken,
+    async(req, res, next) => {
+        if (req.params.clubID) {
+            try {
+                const club = await Club.findById(req.params.clubID);
+
+                const pendingRequest = club.members.find(
+                    (member) => member.email === req.body.email
+                );
+                if (pendingRequest) {
+                    club.members.splice(club.members.indexOf(pendingRequest), 1)
+                    await club.save();
+                    return res
+                        .status(200)
+                        .json({ message: "Membership request declined!" });
+                }
+
+                res.status(400).json({
+                    message: "Request not found!",
+                });
+            } catch (error) {
+                next(error);
+            }
+        } else {
+            res.status(400).json({ message: "Invalid club ID!" });
+        }
+    }
+);
+
 // See membership requests to a club
 router.put(
     "/club/membershiprequests/:clubID",

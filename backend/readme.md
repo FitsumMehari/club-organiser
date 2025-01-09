@@ -756,3 +756,41 @@
 
         ```
 
+
+- ## decline membership requests of people to join a single club by club ID
+
+  ```
+      PUT managers/club/declinemembership/:clubID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        { 
+            "_id": "club id",
+            "email": "working email address of the person requesting to join the club"
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Membership request declined!"
+            }            
+        ```
+        If request is approved, the person will receive an email informing them about the approval. 
+
+
