@@ -10,7 +10,7 @@ router.post("/reserve/:eventID", async(req, res, next) => {
 
             const existingRequest = event.attendees.find(member => member.email === req.body.email);
             if (existingRequest) {
-                return res.status(400).json({ message: 'Reservation request already exists' });
+                return res.status(200).json({ message: 'Reservation request already exists' });
             }
 
             event.attendees.push({ name: req.body.name, email: req.body.email, status: "pending" });

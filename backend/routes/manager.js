@@ -110,7 +110,7 @@ router.get(
                     const members = club.members
                     return res.status(200).json({ message: "Membership requests found", members });
                 } else {
-                    return res.status(500).json({
+                    return res.status(400).json({
                         message: "Membership requests not found!"
                     });
                 }
@@ -137,7 +137,7 @@ router.get(
                     const attendees = event.attendees
                     return res.status(200).json({ message: "Reservation requests found", attendees });
                 } else {
-                    return res.status(500).json({
+                    return res.status(400).json({
                         message: "Reservation requests not found!"
                     });
                 }

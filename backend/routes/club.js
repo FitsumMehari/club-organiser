@@ -113,7 +113,7 @@ router.put("/approvemembership", verifyToken, async(req, res, next) => {
             pendingRequest.status = "accepted"
             await club.save()
             await transporter.sendMail(mailOptions);
-            return res.status(400).json({ message: 'Membership request approved!' });
+            return res.status(200).json({ message: 'Membership request approved!' });
         }
 
 
