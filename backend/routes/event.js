@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
+const { verifyToken } = require("./verifyToken")
 
 // Update A CLub By Club ID When A Request To Be A Member is Accepted By The Club Managers
 router.post("/reserve/:eventID", async(req, res, next) => {
@@ -46,6 +47,31 @@ router.get("/:eventID", async(req, res, next) => {
         } catch (error) {
             next(error);
         }
+    }
+});
+
+// Update A CLub By Club ID
+router.put("/:eventID", verifyToken, async(req, res, next) => {
+    try {
+        const updatedEvent = await Event.findByIdAndUpdate(req.params.eventID, {
+            name: req.body.name,
+            category: req.body.category,
+            description: req.body.description,
+            managers: req.body.managers,
+            members: req.body.members,
+            status: req.body.status,
+            logo: req.body.logo,
+            location: req.body.location,
+        });
+
+        const newValues = await Event.findOne(req.body.id);
+
+        res.status(200).json({
+            message: "Update Successful!",
+            newValues,
+        });
+    } catch (error) {
+        next(error);
     }
 });
 

@@ -902,3 +902,66 @@
         If request is approved, the person will receive an email informing them about the approval. 
 
 
+
+- ## update a single event by event ID
+
+  ```
+      PUT events/:eventID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=organiser}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+            "name": "",
+            "category": "",
+            "description": "",
+            "status": "",
+
+            optional values include the following:
+
+            "date": "{Date}",
+            "location": "",
+            "organiser": "",
+            "attendees": "{array of object in the form of {"name": "", "email": "" }}",
+            "logo: "{url of an image file}",
+
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Update Successful!",
+                "newValues": {
+                    "_id": "",
+                    "name": "",
+                    "category": "",
+                    "description": "",
+                    "managers": [
+                        "_id of users set us managers"
+                    ],
+                    "events": [],
+                    "members": [],
+                    "status": "",
+                    "createdAt": "2025-01-03T08:02:36.598Z",
+                    "updatedAt": "2025-01-03T08:02:36.598Z",
+                    "__v": 0
+                } other optional fields will be added if they were included in the request
+
+            }
+            
+        ```
