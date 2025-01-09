@@ -794,3 +794,38 @@
         If request is approved, the person will receive an email informing them about the approval. 
 
 
+
+- ## get event reservation requests to a an event based on event ID
+
+  ```
+      GET managers/club/events/event/reservations/:eventID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+    ```
+        {
+           "authorization": "Bearer {token}"
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Reservation requests found",
+                "members": [
+                    {
+                        "name": "",
+                        "email": "",
+                        "status": "",
+                        "_id": "677f87d63d85401a40daba8f"
+                    }
+                ]
+            }
+
+        ```
+

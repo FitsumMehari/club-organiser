@@ -98,7 +98,7 @@ router.put(
 );
 
 // See membership requests to a club
-router.put(
+router.get(
     "/club/membershiprequests/:clubID",
     verifyToken,
     async(req, res, next) => {
@@ -123,6 +123,32 @@ router.put(
     }
 );
 
+
+// See reservation requests to an event using eventID
+router.get(
+    "/club/event/reservations/:eventID",
+    verifyToken,
+    async(req, res, next) => {
+        if (req.params.eventID) {
+            try {
+                const event = await Event.findById(req.params.eventID);
+
+                if (event.attendees.length > 0) {
+                    const attendees = event.attendees
+                    return res.status(200).json({ message: "Reservation requests found", attendees });
+                } else {
+                    return res.status(500).json({
+                        message: "Reservation requests not found!"
+                    });
+                }
+            } catch (error) {
+                next(error);
+            }
+        } else {
+            res.status(500).json({ message: "Invalid event ID!" });
+        }
+    }
+);
 // Add a new event
 router.post("/club/events/:clubID", verifyToken, async(req, res, next) => {
     if (req.params.clubID) {
