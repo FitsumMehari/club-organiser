@@ -57,14 +57,15 @@ router.put("/:eventID", verifyToken, async(req, res, next) => {
             name: req.body.name,
             category: req.body.category,
             description: req.body.description,
-            managers: req.body.managers,
-            members: req.body.members,
+            organiser: req.body.organiser,
+            attendees: req.body.attendees,
             status: req.body.status,
             logo: req.body.logo,
             location: req.body.location,
+            date: req.body.date,
         });
 
-        const newValues = await Event.findOne(req.body.id);
+        const newValues = await Event.findOne(updatedEvent._id);
 
         res.status(200).json({
             message: "Update Successful!",
