@@ -99,4 +99,17 @@ router.get("/", verifyToken, async(req, res, next) => {
     }
 })
 
+router.delete("/:ProposalID", verifyToken, async(req, res, next) => {
+    try {
+        await Proposal.findByIdAndDelete(req.params.ProposalID);
+
+        res.status(201).json({
+            message: "Delete Successful!",
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 module.exports = router;

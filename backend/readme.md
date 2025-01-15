@@ -430,7 +430,7 @@
 
         ```
 
-- ## For deleting a single club by club ID
+- ## delete a single club by club ID
 
   ```
       DELETE clubs/:clubID
@@ -1131,4 +1131,39 @@
                     "__v": 0
                 }
             ]
+        ```
+
+- ## For deleting a single club by club ID
+
+  ```
+      DELETE proposals/:proposalID
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=admin}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+            none
+
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            {
+                "message": "Delete Successful!"
+            }
         ```
