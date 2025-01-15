@@ -1006,3 +1006,64 @@
             }
 
           ```
+
+- ## accepting a proposal of a new club
+
+  ```
+      POST /proposals/acceptProposal/:proposalID
+  ```
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=admin}"
+
+
+  ```
+  - Body:
+
+        ```
+            {
+                none
+
+            }
+
+        ```
+
+  ### response:
+
+          ```
+              {
+    "message": "Club and account created succefully! Default password=12345",
+    "newClub": {
+                "name": "",
+                "category": "",
+                "description": "",
+                "managers": [
+                    "_id of the user added as an organiser"
+                ],
+                "events": [],
+                "members": [],
+                "status": "open",
+                "_id": "",
+                "createdAt": "2025-01-15T14:52:57.679Z",
+                "updatedAt": "2025-01-15T14:52:57.895Z",
+                "__v": 1
+            },
+            "savedUser": {
+                "username": "",
+                "email": "",
+                "phone": "",
+                "userType": "organiser",
+                "clubs": [
+                    "_id of club"
+                ],
+                "_id": "",
+                "createdAt": "2025-01-15T14:52:57.889Z",
+                "updatedAt": "2025-01-15T14:52:57.889Z",
+                "__v": 0
+            }
+        }
+
+          ```
