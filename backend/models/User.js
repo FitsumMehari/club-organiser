@@ -21,7 +21,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ["organiser", "admin"],
         default: "organiser",
-        required: true,
     },
     clubs: [{
         type: mongoose.Schema.Types.ObjectId,

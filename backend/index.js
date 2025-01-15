@@ -18,6 +18,7 @@ const authRoute = require("./routes/auth");
 const clubRoute = require("./routes/club");
 const managerRoute = require("./routes/manager");
 const eventRoute = require("./routes/event");
+const proposalRoute = require("./routes/proposal");
 
 // Database connector code
 mongoose
@@ -34,6 +35,7 @@ app.use("/auth", authRoute);
 app.use("/clubs", clubRoute);
 app.use("/managers", managerRoute);
 app.use("/events", eventRoute);
+app.use("/proposals", proposalRoute);
 
 //ROUTE NOT FOUND
 app.use((req, res, next) => {
