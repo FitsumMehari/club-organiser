@@ -13,8 +13,8 @@
 
 - Profile pic is sent as an address to a cloud file storage, and not the actual picture.
 - Start point is index.js
-- Add packages by ``` npm i ``` or ``` yarn ``` first
-- Run it by ``` node index.js ```
+- Add packages by `npm i` or `yarn` first
+- Run it by `node index.js`
 
 # Endpoints
 
@@ -129,7 +129,7 @@
             }
         ```
 
-- ##  reset password initial
+- ## reset password initial
 
   ```
       PUT auth/forgot-password
@@ -179,7 +179,7 @@
             }
         ```
 
---------------------------------------------------------------------------------------------
+---
 
 - ## add a new club
 
@@ -319,7 +319,6 @@
 
         ```
 
-
 - ## get club based on manager ID
 
   ```
@@ -428,7 +427,7 @@
                 } other optional fields will be added if they were included in the request
 
             }
-            
+
         ```
 
 - ## For deleting a single club by club ID
@@ -451,9 +450,9 @@
   - Body:
 
     ```
-        { 
+        {
             "_id": "club id"
-            
+
         }
 
     ```
@@ -463,7 +462,7 @@
         ```
             {
                 "message": "Delete Successful!"
-            }            
+            }
         ```
 
 - ## request to join a single club by club ID
@@ -477,10 +476,10 @@
   - Body:
 
     ```
-        { 
+        {
             "name": "name of the person requesting to join the club",
             "email": "working email address of the person requesting to join the club"
-            
+
         }
 
     ```
@@ -490,7 +489,7 @@
         ```
             {
                 "message": "Member request submitted successfully"
-            }            
+            }
         ```
 
 - ## approve membership requests of people to join a single club by club ID
@@ -513,7 +512,7 @@
   - Body:
 
     ```
-        { 
+        {
             "_id": "club id",
             "email": "working email address of the person requesting to join the club"
         }
@@ -525,11 +524,11 @@
         ```
             {
                 "message": "Membership request approved!"
-            }            
+            }
         ```
-        If request is approved, the person will receive an email informing them about the approval. 
+        If request is approved, the person will receive an email informing them about the approval.
 
----------------------------------------------------------------------------------------------------
+---
 
 - ## add a new event
 
@@ -599,10 +598,10 @@
   - Body:
 
     ```
-        { 
+        {
             "name": "name of the person requesting to join the club",
             "email": "working email address of the person requesting to join the club"
-            
+
         }
 
     ```
@@ -612,7 +611,7 @@
         ```
             {
                 "message": "Member request submitted successfully"
-            }            
+            }
         ```
 
 - ## delete a single event by event ID
@@ -721,7 +720,6 @@
 
         ```
 
-
 - ## get membership requests to a club based on club ID
 
   ```
@@ -756,7 +754,6 @@
 
         ```
 
-
 - ## decline membership requests of people to join a single club by club ID
 
   ```
@@ -777,7 +774,7 @@
   - Body:
 
     ```
-        { 
+        {
             "_id": "club id",
             "email": "working email address of the person requesting to join the club"
         }
@@ -789,11 +786,9 @@
         ```
             {
                 "message": "Membership request declined!"
-            }            
+            }
         ```
-        If request is approved, the person will receive an email informing them about the approval. 
-
-
+        If request is approved, the person will receive an email informing them about the approval.
 
 - ## get event reservation requests to a an event based on event ID
 
@@ -829,7 +824,6 @@
 
         ```
 
-
 - ## approve reservation requests of people to join a single event by event ID
 
   ```
@@ -850,7 +844,7 @@
   - Body:
 
     ```
-        { 
+        {
             "email": "working email address of the person requesting to join the club"
         }
 
@@ -861,10 +855,9 @@
         ```
             {
                 "message": "Membership request approved!"
-            }            
+            }
         ```
-        If request is approved, the person will receive an email informing them about the approval. 
-
+        If request is approved, the person will receive an email informing them about the approval.
 
 - ## decline reservation requests of people to join a single event by event ID
 
@@ -886,7 +879,7 @@
   - Body:
 
     ```
-        { 
+        {
             "email": "working email address of the person requesting to join the club"
         }
 
@@ -897,11 +890,9 @@
         ```
             {
                 "message": "Membership request declined!"
-            }            
+            }
         ```
-        If request is approved, the person will receive an email informing them about the approval. 
-
-
+        If request is approved, the person will receive an email informing them about the approval.
 
 - ## update a single event by event ID
 
@@ -963,5 +954,55 @@
                 } other optional fields will be added if they were included in the request
 
             }
-            
+
         ```
+
+- ## sending a proposal of a new club
+
+  ```
+      POST /proposals
+  ```
+
+  - Body:
+
+        ```
+            {
+                "organiser": {
+                            "username": "",
+                            "email": "",
+                            "phone": ""
+                        },
+                "club": {
+                            "name": "",
+                            "category": "",
+                            "description": ""
+                        }
+
+            }
+
+        ```
+
+  ### response:
+
+          ```
+              {
+                "message": "Proposal Sent Successfully!",
+                "savedProposal": {
+                    "organiser": {
+                        "username": "",
+                        "email": "",
+                        "phone": ""
+                    },
+                    "club": {
+                        "name": "",
+                        "category": "",
+                        "description": ""
+                    },
+                    "_id": "6787b5e2ca9a9a165a396bee",
+                    "createdAt": "2025-01-15T13:19:30.877Z",
+                    "updatedAt": "2025-01-15T13:19:30.877Z",
+                    "__v": 0
+                }
+            }
+
+          ```
