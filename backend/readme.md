@@ -1067,3 +1067,68 @@
         }
 
           ```
+
+- ## get all clubs
+
+  ```
+      GET proposals/
+  ```
+
+  ### request parameters:
+
+  - Headers:
+
+  ```
+
+      "authorization": "bearer {received token of a user with userType=admin}"
+
+
+  ```
+
+  - Body:
+
+    ```
+        {
+           not required
+        }
+
+    ```
+
+  ### response:
+
+        ```
+            [
+                {
+                    "organiser": {
+                        "username": "",
+                        "email": "",
+                        "phone": ""
+                    },
+                    "club": {
+                        "name": "",
+                        "category": "",
+                        "description": ""
+                    },
+                    "_id": "",
+                    "createdAt": "2025-01-15T13:19:30.877Z",
+                    "updatedAt": "2025-01-15T13:19:30.877Z",
+                    "__v": 0
+                },
+                {
+                    "organiser": {
+                        "username": "",
+                        "email": "",
+                        "phone": ""
+                    },
+                    "club": {
+                        "name": "",
+                        "category": "",
+                        "description": ""
+                    },
+                    "_id": "",
+                    "createdAt": "2025-01-15T14:48:11.232Z",
+                    "updatedAt": "2025-01-15T14:48:11.232Z",
+                    "__v": 0
+                }
+            ]
+        ```

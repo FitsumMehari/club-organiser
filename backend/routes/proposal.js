@@ -90,4 +90,13 @@ router.post("/acceptProposal/:proposalID", verifyToken, async(req, res, next) =>
     }
 })
 
+router.get("/", verifyToken, async(req, res, next) => {
+    try {
+        const allProposals = await Proposal.find({});
+        res.status(200).json(allProposals);
+    } catch (error) {
+        next(error);
+    }
+})
+
 module.exports = router;
