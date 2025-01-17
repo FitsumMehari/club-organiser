@@ -1,0 +1,139 @@
+.form {
+    display: flex;
+    margin: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: fit-content;
+}
+
+.form>.left {
+    padding: 2rem;
+    padding-right: 10rem;
+    color: #c9c9c9;
+    border-radius: 0.5rem;
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.form>.left>.top {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.form>.left>.top>p.title {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.form>.left>.top>p.description {
+    font-weight: 300;
+}
+
+.form>.left>.middle {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+
+.form>.left>.middle>li {
+    display: flex;
+    margin: 0.5rem;
+}
+
+.form>.left>.middle>li>img {
+    margin-right: 0.5rem;
+    width: 1.2rem;
+}
+
+.form>.left>.bottom {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form>.left>.bottom>li>img {
+    width: 1rem;
+    margin: 0.5rem;
+}
+
+.form>.right {
+    margin-left: 2rem;
+    width: auto;
+}
+
+.form>.right>.top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form>.right>.top>.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin: 0.5rem;
+}
+
+.form>.right>.top>.input>label {
+    color: #00d4fc;
+    font-size: .8rem;
+}
+
+.form>.right>.top>.input>input {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    border-bottom: 0.1rem solid #8d8d8d;
+    width: 15rem;
+}
+
+.form>.right>.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form>.right>.bottom>.left {
+    margin-left: auto;
+    color: #00d4fc;
+    font-size: 0.8rem;
+}
+
+.form>.right>.bottom>.right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+.form>.right>.bottom>.right>.top>button {
+    background-color: #00d4fc;
+    color: #fff;
+    border-radius: 0.2rem;
+    padding: .5rem;
+    min-width: 12rem;
+    width: fit-content;
+}
+
+.form>.right>.bottom>.right>.top>button:hover {
+    background-color: #3cdfff;
+}
+
+.form>.right>.bottom>.right>.bottom {
+    color: #00d4fc;
+    font-size: .6rem;
+    margin-top: .5rem;
+}

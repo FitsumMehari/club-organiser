@@ -1,0 +1,51 @@
+<div class="form">
+    <div class="left" *ngIf="formDetails.left">
+        <div class="top" *ngIf="formDetails.left.top">
+            <p class="title">{{ formDetails.left.top.title }}</p>
+            <p class="description">{{ formDetails.left.top.description }}</p>
+        </div>
+        <ul class="middle" *ngIf="formDetails.left.middle">
+            <li *ngIf="formDetails.left.middle.phone">
+                <img src="phone.svg" alt="" />
+                <p>{{ formDetails.left.middle.phone }}</p>
+            </li>
+            <li *ngIf="formDetails.left.middle.email">
+                <img src="mail.svg" alt="" />
+                <p>{{ formDetails.left.middle.email }}</p>
+            </li>
+            <li *ngIf="formDetails.left.middle.location">
+                <img src="location.svg" alt="" />
+                <p>{{ formDetails.left.middle.location }}</p>
+            </li>
+        </ul>
+        <ul class="bottom" *ngIf="formDetails.left.bottom">
+            <li *ngFor="let icon of formDetails.left.bottom.icons">
+                <img src="{{ icon }}" alt="" />
+            </li>
+        </ul>
+    </div>
+    <form #form="ngForm" class="right" *ngIf="formDetails.right">
+        <div class="top" *ngIf="formDetails.right.top">
+            <div class="input" *ngFor="let input of formDetails.right.top.inputs">
+                <label for="{{input.label}}">{{input.label}}</label>
+                <input type="{{input.type}}" name="{{input.label}}" ngModel />
+            </div>
+        </div>
+        <div class="bottom" *ngIf="formDetails.right.bottom">
+            <div class="left" *ngIf="formDetails.right.bottom.left">
+                <p>{{formDetails.right.bottom.left}}</p>
+            </div>
+            <div class="right" *ngIf="formDetails.right.bottom.right">
+                <div class="top" *ngIf="formDetails.right.bottom.right.top">
+                    <button (click)="submit(form.value)">{{formDetails.right.bottom.right.top}}</button>
+                </div>
+                <div class="bottom" *ngIf="formDetails.right.bottom.right.bottom">
+                    <p>
+                        {{formDetails.right.bottom.right.bottom.text}}
+                        <a routerLink="{{formDetails.right.bottom.right.bottom.linkAddress}}"><b>{{formDetails.right.bottom.right.bottom.linkText}}</b></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
