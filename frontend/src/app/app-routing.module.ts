@@ -9,6 +9,11 @@ const routes: Routes = [
   {path: "events", component: AppComponent },
   {path: "contact", component: AppComponent },
   {path: "register", component: AppComponent },
+  {path: "login", component: AppComponent },
+  {path: "user", component: AppComponent },
+  {path: "forgot-password", component: AppComponent },
+  {path: "verify-otp", component: AppComponent },
+  {path: "reset-password", component: AppComponent },
 ];
 
 @NgModule({
