@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
   {path: "home", component: AppComponent },
   {path: "clubs", component: AppComponent },
   {path: "events", component: AppComponent },
-  {path: "contact", component: AppComponent },
+  {path: "contact", component: ContactComponent },
   {path: "join-club", component: AppComponent },
   {path: "reserve-ticket", component: AppComponent },
   {path: "send-proposal", component: AppComponent },
