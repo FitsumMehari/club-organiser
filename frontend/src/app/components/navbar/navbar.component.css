@@ -1,0 +1,46 @@
+.navbar {
+    height: 10vh;
+    width: 100vw;
+    background-color: #303030;
+    color: #FFF;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logo {
+    width: 40%;
+}
+
+.links,
+button {
+    width: 20%;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
+}
+
+.links>li {
+    margin-right: 1rem;
+}
+
+.links>li>a>.active {
+    color: #00d4fc;
+    text-decoration: underline;
+}
+
+.links>li>a:hover {
+    color: #00d4fc;
+}
+
+button {
+    margin: auto;
+    width: 10rem;
+    color: black;
+    padding: 0.5rem 0.25rem;
+    background-image: linear-gradient(106deg, #00d4fc, #00fee3);
+}
