@@ -1,0 +1,20 @@
+div {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+}
+
+app-navbar {
+    margin-bottom: 2rem;
+}
+
+router-outlet {
+    width: 100vw;
+}
+
+app-footer {
+    margin-top: 2rem;
+}
