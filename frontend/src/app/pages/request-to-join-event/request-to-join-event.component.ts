@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-request-to-join-club',
-  templateUrl: './request-to-join-club.component.html',
-  styleUrl: './request-to-join-club.component.css'
+  selector: 'app-request-to-join-event',
+  templateUrl: './request-to-join-event.component.html',
+  styleUrl: './request-to-join-event.component.css'
 })
-export class RequestToJoinClubComponent {
-  constructor(private route:ActivatedRoute){}
+export class RequestToJoinEventComponent {
+constructor(private route:ActivatedRoute){}
   formdetails = {
     left: {
       top: {
-        title: 'REQUEST TO JOIN A CLUB',
+        title: 'REQUEST A TICKET',
         description: 'Please fill in the form.',
       }
     },

@@ -8,6 +8,7 @@ import { RequestToJoinClubComponent } from './pages/request-to-join-club/request
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { VerifyOTPComponent } from './pages/verify-otp/verify-otp.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { RequestToJoinEventComponent } from './pages/request-to-join-event/request-to-join-event.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
@@ -16,7 +17,7 @@ const routes: Routes = [
   {path: "events", component: AppComponent },
   {path: "contact", component: ContactComponent },
   {path: "join-club/:clubID", component: RequestToJoinClubComponent },
-  {path: "reserve-ticket", component: AppComponent },
+  {path: "reserve-ticket/:eventID", component: RequestToJoinEventComponent },
   {path: "send-proposal", component: SendProposalComponent },
   {path: "login", component: LoginComponent },
   {path: "forgot-password", component: ForgotPasswordComponent },
