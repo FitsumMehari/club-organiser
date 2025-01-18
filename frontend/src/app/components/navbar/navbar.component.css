@@ -28,7 +28,7 @@ button {
     margin-right: 1rem;
 }
 
-.links>li>a>.active {
+.active {
     color: #00d4fc;
     text-decoration: underline;
 }
