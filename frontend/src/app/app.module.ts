@@ -15,6 +15,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { VerifyOTPComponent } from './pages/verify-otp/verify-otp.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { RequestToJoinEventComponent } from './pages/request-to-join-event/request-to-join-event.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RequestToJoinEventComponent } from './pages/request-to-join-event/reque
     ForgotPasswordComponent,
     VerifyOTPComponent,
     ResetPasswordComponent,
-    RequestToJoinEventComponent
+    RequestToJoinEventComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
