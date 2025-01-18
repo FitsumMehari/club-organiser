@@ -17,6 +17,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { RequestToJoinEventComponent } from './pages/request-to-join-event/request-to-join-event.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ClubsComponent } from './pages/clubs/clubs.component';
+import { EventsComponent } from './pages/events/events.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ClubsComponent } from './pages/clubs/clubs.component';
     ResetPasswordComponent,
     RequestToJoinEventComponent,
     HomeComponent,
-    ClubsComponent
+    ClubsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
