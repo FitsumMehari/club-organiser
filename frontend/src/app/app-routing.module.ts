@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
@@ -11,7 +12,7 @@ const routes: Routes = [
   {path: "contact", component: ContactComponent },
   {path: "join-club", component: AppComponent },
   {path: "reserve-ticket", component: AppComponent },
-  {path: "send-proposal", component: AppComponent },
+  {path: "send-proposal", component: SendProposalComponent },
   {path: "login", component: AppComponent },
   {path: "forgot-password", component: AppComponent },
   {path: "verify-otp", component: AppComponent },

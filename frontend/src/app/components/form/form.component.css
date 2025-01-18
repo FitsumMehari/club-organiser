@@ -2,11 +2,12 @@
     display: flex;
     margin: 0.5rem;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     border-radius: 0.5rem;
     padding: 0.5rem;
     width: fit-content;
     background-color: #fff;
+    height: 100%;
 }
 
 .form>.left {
@@ -78,7 +79,7 @@
     grid-template-columns: 1fr 1fr;
 }
 
-.form>.right>.top>.input {
+.form>.right>.top>.input>div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,12 +87,14 @@
     margin: 0.5rem;
 }
 
-.form>.right>.top>.input>label {
+.form>.right>.top>.input>div>label {
     color: #00d4fc;
     font-size: .8rem;
 }
 
-.form>.right>.top>.input>input {
+.form>.right>.top>.input>div>input,
+.form>.right>.top>.input>div>select,
+.form>.right>.top>.input>div>select>option {
     font-size: 1rem;
     border: none;
     outline: none;

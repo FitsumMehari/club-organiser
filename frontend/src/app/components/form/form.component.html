@@ -27,8 +27,16 @@
     <form #form="ngForm" class="right" *ngIf="formDetails.right">
         <div class="top" *ngIf="formDetails.right.top">
             <div class="input" *ngFor="let input of formDetails.right.top.inputs">
-                <label for="{{input.label}}">{{input.label}}</label>
-                <input type="{{input.type}}" name="{{input.label}}" ngModel />
+                <div *ngIf="input.type !== 'select'">
+                    <label for="{{input.label}}">{{input.label}}</label>
+                    <input type="{{input.type}}" name="{{input.label}}" ngModel />
+                </div>
+                <div *ngIf="input.type === 'select'">
+                    <label for="{{input.label}}">{{input.label}}</label>
+                    <select name="{{input.label}}" name="{{input.label}}" ngModel id="{{input.label}}">
+                      <option *ngFor="let option of input.options" [value]="option">{{option}}</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="bottom" *ngIf="formDetails.right.bottom">
