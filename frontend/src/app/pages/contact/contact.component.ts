@@ -32,14 +32,8 @@ export class ContactComponent implements OnInit {
         ],
       },
       bottom: {
-        left: "Forgot Password",
         right: {
-          top: "LOGIN",
-          bottom: {
-            text: "Don't have an account?",
-            linkText: "Register Now",
-            linkAddress: "/send-proposal"
-          }
+          top: "SEND MESSAGE",
         }
       },
     },

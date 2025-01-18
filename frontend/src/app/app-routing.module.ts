@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: "join-club", component: AppComponent },
   {path: "reserve-ticket", component: AppComponent },
   {path: "send-proposal", component: SendProposalComponent },
-  {path: "login", component: AppComponent },
+  {path: "login", component: LoginComponent },
   {path: "forgot-password", component: AppComponent },
   {path: "verify-otp", component: AppComponent },
   {path: "reset-password", component: AppComponent },
