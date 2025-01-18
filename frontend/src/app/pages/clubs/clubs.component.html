@@ -1,1 +1,20 @@
-<p>clubs works!</p>
+<div class="page">
+    <div class="top">
+        <input type="text" placeholder="search">
+        <ul class="buttons">
+            <li><a routerLink="">Social</a></li>
+            <li><a routerLink="">Academic</a></li>
+            <li><a routerLink="">Managemnt</a></li>
+            <li><a routerLink="">Undefined</a></li>
+            <li><a routerLink="">Social</a></li>
+            <li><a routerLink="">Academic</a></li>
+            <li><a routerLink="">Managemnt</a></li>
+            <li><a routerLink="">Undefined</a></li>
+        </ul>
+    </div>
+    <div class="clubs">
+        <div class="club" *ngFor="let club of clubs">
+            <img routerLink="/join-club/{{club.id}}" src="{{club.image}}" alt="">
+        </div>
+    </div>
+</div>
