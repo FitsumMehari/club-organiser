@@ -9,10 +9,11 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { VerifyOTPComponent } from './pages/verify-otp/verify-otp.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { RequestToJoinEventComponent } from './pages/request-to-join-event/request-to-join-event.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
-  {path: "home", component: AppComponent },
+  {path: "home", component: HomeComponent },
   {path: "clubs", component: AppComponent },
   {path: "events", component: AppComponent },
   {path: "contact", component: ContactComponent },
