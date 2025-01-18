@@ -41,7 +41,7 @@
         </div>
         <div class="bottom" *ngIf="formDetails.right.bottom">
             <div class="left" *ngIf="formDetails.right.bottom.left">
-                <p>{{formDetails.right.bottom.left}}</p>
+                <a routerLink="{{formDetails.right.bottom.left.link}}">{{formDetails.right.bottom.left.text}}</a>
             </div>
             <div class="right" *ngIf="formDetails.right.bottom.right">
                 <div class="top" *ngIf="formDetails.right.bottom.right.top">

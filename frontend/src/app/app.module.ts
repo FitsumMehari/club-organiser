@@ -16,6 +16,7 @@ import { VerifyOTPComponent } from './pages/verify-otp/verify-otp.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { RequestToJoinEventComponent } from './pages/request-to-join-event/request-to-join-event.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ClubsComponent } from './pages/clubs/clubs.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HomeComponent } from './pages/home/home.component';
     VerifyOTPComponent,
     ResetPasswordComponent,
     RequestToJoinEventComponent,
-    HomeComponent
+    HomeComponent,
+    ClubsComponent
   ],
   imports: [
     BrowserModule,

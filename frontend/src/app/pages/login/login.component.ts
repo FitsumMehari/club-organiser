@@ -20,7 +20,10 @@ export class LoginComponent {
           { label: 'Password', type: 'password' },        ],
       },
       bottom: {
-        left: "Forgot Password",
+        left: {
+          text: "Forgot Password",
+          link: "/forgot-password"
+        },
         right: {
           top: "LOGIN",
           bottom: {
