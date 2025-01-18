@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RequestToJoinClubComponent } from './pages/request-to-join-club/request-to-join-club.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
@@ -11,7 +12,7 @@ const routes: Routes = [
   {path: "clubs", component: AppComponent },
   {path: "events", component: AppComponent },
   {path: "contact", component: ContactComponent },
-  {path: "join-club", component: AppComponent },
+  {path: "join-club/:clubID", component: RequestToJoinClubComponent },
   {path: "reserve-ticket", component: AppComponent },
   {path: "send-proposal", component: SendProposalComponent },
   {path: "login", component: LoginComponent },

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RequestToJoinClubComponent } from './pages/request-to-join-club/request-to-join-club.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginComponent } from './pages/login/login.component';
     FormComponent,
     ContactComponent,
     SendProposalComponent,
-    LoginComponent
+    LoginComponent,
+    RequestToJoinClubComponent
   ],
   imports: [
     BrowserModule,
