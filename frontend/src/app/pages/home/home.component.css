@@ -1,0 +1,100 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.top {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: baseline;
+    width: 55%;
+}
+
+.top>.motto {
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.top>.title {
+    margin: 2rem 0;
+    font-weight: bold;
+    line-height: 3rem;
+    font-size: 3rem;
+    width: 4rem;
+    text-wrap: wrap;
+}
+
+.top>.title>span {
+    font-size: 4rem;
+    width: 1rem;
+    display: inline;
+    color: #00D4FC;
+}
+
+.top>.description {
+    width: 40vw;
+    font-size: .8rem;
+    color: #d4d4d4;
+}
+
+.news {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.news-inverted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.news>.left {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width: 40%;
+}
+
+.news>.left>.title {
+    width: 80%;
+    margin: auto;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.news>.left>.description {
+    margin: auto;
+    width: 80%;
+    color: #c2bbbb;
+    font-size: 0.8rem;
+    font-weight: 100;
+    letter-spacing: .1rem;
+    line-height: 1.3rem;
+    text-wrap: wrap;
+}
+
+.news>.left>a {
+    margin-right: auto;
+    margin-left: 3.3rem;
+    color: #00D4FC;
+    font-size: .8rem;
+}
+
+.news>.left>a>img {
+    display: inline;
+    width: .8rem;
+}
+
+.news>.right>img {
+    height: 20rem;
+}
