@@ -9,7 +9,7 @@ export class ResetPasswordComponent {
   formdetails = {
     left: {
       top: {
-        title: 'PLEASE CHECK YOUR EMAIL',
+        title: 'CREATE NEW PASSWORD',
         description: 'We have sent the OTP verification code to your email address check your email and enter the code below.',
       }
     },
