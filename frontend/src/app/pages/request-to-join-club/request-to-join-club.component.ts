@@ -30,9 +30,7 @@ export class RequestToJoinClubComponent {
       },
     },
   };
-ngOnInit(): void {
 
-}
   handleSubmit($event:any) {
     console.log($event);
     console.log(this.route.snapshot.params["clubID"]);

@@ -5,6 +5,9 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RequestToJoinClubComponent } from './pages/request-to-join-club/request-to-join-club.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { VerifyOTPComponent } from './pages/verify-otp/verify-otp.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full" },
@@ -16,9 +19,9 @@ const routes: Routes = [
   {path: "reserve-ticket", component: AppComponent },
   {path: "send-proposal", component: SendProposalComponent },
   {path: "login", component: LoginComponent },
-  {path: "forgot-password", component: AppComponent },
-  {path: "verify-otp", component: AppComponent },
-  {path: "reset-password", component: AppComponent },
+  {path: "forgot-password", component: ForgotPasswordComponent },
+  {path: "verify-otp", component: VerifyOTPComponent },
+  {path: "reset-password", component: ResetPasswordComponent },
   {path: "user", component: AppComponent },
 ];
 
