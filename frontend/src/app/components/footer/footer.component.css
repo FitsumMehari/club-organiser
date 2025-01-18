@@ -1,7 +1,9 @@
 .footer {
     display: flex;
     flex-direction: column;
-    background-color: #353535;
+    /* background-color: #353535; */
+    border-top: .2rem solid #353535;
+    background-color: #1e1e1e;
     height: auto;
     width: 100vw;
     font-size: .8rem;
@@ -14,6 +16,10 @@
     align-items: center;
     margin: 0 5rem;
     margin-bottom: 2rem;
+}
+
+.footer>.top>.left {
+    color: #FFF;
 }
 
 .footer>.top>.left>.colored {
@@ -34,6 +40,10 @@
 
 .footer>.top>.right .title {
     color: #00D4FC;
+}
+
+.footer>.bottom>.left {
+    color: #FFF;
 }
 
 .footer>.bottom>.right {
