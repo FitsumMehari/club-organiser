@@ -1,0 +1,20 @@
+<div class="page">
+    <div class="top">
+        <input type="text" placeholder="search">
+        <ul class="buttons">
+            <li><a routerLink="">Social</a></li>
+            <li><a routerLink="">Academic</a></li>
+            <li><a routerLink="">Managemnt</a></li>
+            <li><a routerLink="">Undefined</a></li>
+            <li><a routerLink="">Social</a></li>
+            <li><a routerLink="">Academic</a></li>
+            <li><a routerLink="">Managemnt</a></li>
+            <li><a routerLink="">Undefined</a></li>
+        </ul>
+    </div>
+    <div class="events">
+        <div class="event" *ngFor="let event of events">
+            <img routerLink="/reserve-ticket/{{event.id}}" src="{{event.image}}" alt="">
+        </div>
+    </div>
+</div>
