@@ -142,11 +142,11 @@ router.put("/updateprofile", verifyToken, async(req, res, next) => {
 router.post("/forgot-password", async(req, res, next) => {
     try {
         const { email } = req.body;
-        if (!email) return res.status(404).json({ message: "Email is required!" });
+        if (!email) return res.status(200).json({ message: "Email is required!" });
 
         const createdPasswordResetOTP = await sendPasswordResetOTP(email, res);
 
-        res.status(200).json(createdPasswordResetOTP);
+        res.status(200).json()
     } catch (error) {
         next(error);
     }
@@ -157,7 +157,7 @@ const sendPasswordResetOTP = async(email, res) => {
         const existingUser = await User.findOne({ email: email });
 
         if (!existingUser)
-            return res.status(404).json({ message: "User not found" });
+            return res.status(200).json({ message: "User not found" });
 
         const generatedOTP = generateOTP();
         const otpDetails = {
@@ -203,13 +203,13 @@ function generateOTP() {
 }
 
 
-router.post("/reset-password", verifyOTP, async(req, res) => {
+router.post("/reset-password", verifyOTP, async(req, res, next) => {
     const { email, newPassword } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(200).json({ message: "User not found" });
         }
 
         // Hash the new password
@@ -222,7 +222,7 @@ router.post("/reset-password", verifyOTP, async(req, res) => {
 
         res.json({ message: "Password reset successfully" });
     } catch (error) {
-        res.status(500).json({ message: "Error resetting password" });
+        next(error)
     }
 });
 
