@@ -6,17 +6,17 @@ const verifyOTP = async(req, res, next) => {
     try {
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(200).json({ message: "User not found" });
         }
 
         if (existingUser.generatedOTP !== otp) {
-            return res.status(400).json({ message: "Invalid or expired OTP" });
+            return res.status(200).json({ message: "Invalid or expired OTP" });
         }
 
         // res.json({ message: 'OTP verified' });
         next();
     } catch (error) {
-        res.status(500).json({ message: "Error verifying OTP" });
+        next(error)
     }
 };
 
