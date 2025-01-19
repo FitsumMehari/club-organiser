@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './reset-password.component.css'
 })
 export class ResetPasswordComponent {
+  constructor(private authService: AuthService) {}
   formdetails = {
     left: {
       top: {
@@ -16,9 +18,9 @@ export class ResetPasswordComponent {
     right: {
       top: {
         inputs: [
-          { label: 'Email', type: 'email' },
-          { label: 'OTP Code', type: 'text' },
-          { label: 'New Password', type: 'password' },
+          { label: 'email', type: 'email' },
+          { label: 'otp', type: 'text' },
+          { label: 'newPassword', type: 'password' },
         ],
       },
       bottom: {
@@ -30,7 +32,7 @@ export class ResetPasswordComponent {
   };
 
   handleSubmit($event:any) {
-    console.log($event);
+    this.authService.resetPassword($event);
 
   }
 }
