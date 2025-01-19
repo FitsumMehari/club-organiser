@@ -12,6 +12,7 @@ router.post("", async(req, res, next) => {
                 username: req.body.organiser.username,
                 email: req.body.organiser.email,
                 phone: req.body.organiser.phone,
+                password: req.body.organiser.password,
             },
             club: {
                 name: req.body.club.name,
@@ -63,7 +64,7 @@ router.post("/acceptProposal/:proposalID", verifyToken, async(req, res, next) =>
 
             // saving organiser info
             const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash("12345", saltRounds);
+            const hashedPassword = await bcrypt.hash(existingProposal.organiser.password, saltRounds);
 
             const newUser = new User({
                 username: existingProposal.organiser.username,
