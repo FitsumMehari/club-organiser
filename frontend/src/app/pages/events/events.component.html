@@ -13,8 +13,9 @@
         </ul>
     </div>
     <div class="events">
-        <div class="event" *ngFor="let event of events">
-            <img routerLink="/reserve-ticket/{{event.id}}" src="{{event.image}}" alt="">
+        <div class="event" *ngFor="let event of allEvents">
+            <img *ngIf="event.image" routerLink="/reserve-ticket/{{event._id}}" src="{{event.image}}" alt="">
+            <img *ngIf="!event.image" routerLink="/reserve-ticket/{{event._id}}" src="image7.svg" alt="">
         </div>
     </div>
 </div>

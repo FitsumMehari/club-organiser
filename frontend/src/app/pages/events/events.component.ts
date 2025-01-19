@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventsService } from '../../services/events.service';
 
 @Component({
   selector: 'app-events',
@@ -6,14 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './events.component.css'
 })
 export class EventsComponent {
-  events = [
-    { image: 'image6.svg', id: '1' },
-    { image: 'image7.svg', id: '2' },
-    { image: 'image6.svg', id: '3' },
-    { image: 'image7.svg', id: '4' },
-    { image: 'image6.svg', id: '1' },
-    { image: 'image7.svg', id: '2' },
-    { image: 'image6.svg', id: '3' },
-    { image: 'image7.svg', id: '4' },
-  ];
+   constructor(private eventsService: EventsService) {}
+
+    allEvents:any = []
+
+    ngOnInit(): void {
+      this.eventsService.getAllEvents();
+      this.eventsService._response.subscribe((next) => {
+        this.allEvents = next;
+      });
+    }
 }
