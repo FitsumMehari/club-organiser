@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClubsService } from '../../services/clubs.service';
 
 @Component({
   selector: 'app-request-to-join-club',
@@ -7,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './request-to-join-club.component.css'
 })
 export class RequestToJoinClubComponent {
-  constructor(private route:ActivatedRoute){}
+  constructor(private route:ActivatedRoute, private clubsService: ClubsService){}
   formdetails = {
     left: {
       top: {
@@ -18,9 +19,8 @@ export class RequestToJoinClubComponent {
     right: {
       top: {
         inputs: [
-          { label: 'First-Name', type: 'text' },
-          { label: 'Email', type: 'email' },
-          { label: 'Phone-Number', type: 'tel' },
+          { label: 'name', type: 'text' },
+          { label: 'email', type: 'email' },
         ],
       },
       bottom: {
@@ -32,8 +32,6 @@ export class RequestToJoinClubComponent {
   };
 
   handleSubmit($event:any) {
-    console.log($event);
-    console.log(this.route.snapshot.params["clubID"]);
-
+    this.clubsService.joinClub(this.route.snapshot.params["clubID"], $event)
   }
 }

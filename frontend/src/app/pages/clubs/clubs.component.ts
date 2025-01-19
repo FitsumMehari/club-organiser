@@ -14,7 +14,7 @@ export class ClubsComponent implements OnInit {
 
   ngOnInit(): void {
     this.clubsService.getAllClubs();
-    this.clubsService._clubs.subscribe((next) => {
+    this.clubsService._response.subscribe((next) => {
       this.allClubs = next;
     });
   }
