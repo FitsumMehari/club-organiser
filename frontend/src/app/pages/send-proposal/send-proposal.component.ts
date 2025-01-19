@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProposalService } from '../../services/proposal.service';
 
 @Component({
   selector: 'app-send-proposal',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './send-proposal.component.css'
 })
 export class SendProposalComponent {
+  constructor(private proposalService: ProposalService) {}
   formdetails = {
     left: {
       top: {
@@ -15,13 +17,13 @@ export class SendProposalComponent {
     right: {
       top: {
         inputs: [
-          { label: 'First-Name', type: 'text' },
-          { label: 'Club-Name', type: 'text' },
-          { label: 'Email', type: 'email' },
-          { label: 'Phone', type: 'tel' },
-          { label: 'Category', type: 'select', options: ["undefined", "social", "academic", "management"] },
-          { label: 'Password', type: 'password' },
-          { label: 'Club-Description', type: 'text' },
+          { label: 'username', type: 'text' },
+          { label: 'email', type: 'email' },
+          { label: 'phone', type: 'tel' },
+          { label: 'name', type: 'text' },
+          { label: 'category', type: 'select', options: ["undefined", "social", "academic", "management"] },
+          { label: 'password', type: 'password' },
+          { label: 'description', type: 'text' },
         ],
       },
       bottom: {
@@ -38,6 +40,6 @@ export class SendProposalComponent {
   };
 
   handleSubmit($event:any) {
-    console.log($event);
+   this.proposalService.sendProposal($event)
   }
 }
