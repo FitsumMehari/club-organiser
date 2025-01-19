@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EventsService } from '../../services/events.service';
 
 @Component({
   selector: 'app-request-to-join-event',
@@ -7,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './request-to-join-event.component.css'
 })
 export class RequestToJoinEventComponent {
-constructor(private route:ActivatedRoute){}
+constructor(private route:ActivatedRoute, private eventService: EventsService){}
   formdetails = {
     left: {
       top: {
@@ -18,9 +19,8 @@ constructor(private route:ActivatedRoute){}
     right: {
       top: {
         inputs: [
-          { label: 'First-Name', type: 'text' },
-          { label: 'Email', type: 'email' },
-          { label: 'Phone-Number', type: 'tel' },
+          { label: 'name', type: 'text' },
+          { label: 'email', type: 'email' },
         ],
       },
       bottom: {
@@ -32,8 +32,6 @@ constructor(private route:ActivatedRoute){}
   };
 
   handleSubmit($event:any) {
-    console.log($event);
-    console.log(this.route.snapshot.params["clubID"]);
-
+    this.eventService.joinEvent(this.route.snapshot.params["eventID"], $event)
   }
 }
