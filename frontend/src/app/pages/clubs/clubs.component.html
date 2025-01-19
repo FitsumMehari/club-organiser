@@ -13,8 +13,9 @@
         </ul>
     </div>
     <div class="clubs">
-        <div class="club" *ngFor="let club of clubs">
-            <img routerLink="/join-club/{{club.id}}" src="{{club.image}}" alt="">
+        <div class="club" *ngFor="let club of allClubs">
+            <img *ngIf="club.image" routerLink="/join-club/{{club._id}}" src="{{club.image}}" alt="">
+            <img *ngIf="!club.image" routerLink="/join-club/{{club._id}}" src="image6.svg" alt="">
         </div>
     </div>
 </div>
