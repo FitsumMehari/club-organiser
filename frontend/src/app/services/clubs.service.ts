@@ -21,13 +21,18 @@ export class ClubsService {
     );
   }
 
-  joinClub(clubId:any, data:any) {
-    this.http.post(`${this.apiUrl}clubs/requestmembership/${clubId}`, data).subscribe(
-      (next) => {
-        this._response.next(next);
-        this.router.navigate(['/home'])
-      },
-      (error) => {}
-    );
+  joinClub(clubId: any, data: any) {
+    this.http
+      .post(`${this.apiUrl}clubs/requestmembership/${clubId}`, data)
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '' };
+          response = next;
+          alert(response.message);
+          this.router.navigate(['/home']);
+        },
+        (error) => {}
+      );
   }
 }
