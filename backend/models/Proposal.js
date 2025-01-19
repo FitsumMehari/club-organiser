@@ -4,7 +4,8 @@ const ProposalSchema = new mongoose.Schema({
     organiser: {
         username: String,
         email: String,
-        phone: String
+        phone: String,
+        password: String
     },
     club: {
         name: String,
