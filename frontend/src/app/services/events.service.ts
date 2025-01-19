@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class ClubsService {
+export class EventsService {
   constructor(private http: HttpClient, private router: Router) {}
   _response: BehaviorSubject<any> = new BehaviorSubject([]);
 
   apiUrl = environment.apiURL;
-  getAllClubs() {
-    this.http.get(`${this.apiUrl}clubs`).subscribe(
+  getAllEvents() {
+    this.http.get(`${this.apiUrl}events`).subscribe(
       (next) => {
         this._response.next(next);
       },
@@ -21,16 +21,16 @@ export class ClubsService {
     );
   }
 
-  joinClub(clubId: any, data: any) {
+  joinEvent(eventId: any, data: any) {
     this.http
-      .post(`${this.apiUrl}clubs/requestmembership/${clubId}`, data)
+      .post(`${this.apiUrl}events/reserve/${eventId}`, data)
       .subscribe(
         (next) => {
           this._response.next(next);
           let response: any = { message: '' };
           response = next;
           alert(response.message);
-          this.router.navigate(['/clubs']);
+          this.router.navigate(['/events']);
         },
         (error) => {}
       );
