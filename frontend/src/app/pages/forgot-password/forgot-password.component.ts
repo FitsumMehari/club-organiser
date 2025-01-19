@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './forgot-password.component.css'
 })
 export class ForgotPasswordComponent {
+  constructor(private authService: AuthService){}
   formdetails = {
     left: {
       top: {
@@ -16,7 +18,7 @@ export class ForgotPasswordComponent {
     right: {
       top: {
         inputs: [
-          { label: 'Email', type: 'email' },
+          { label: 'email', type: 'email' },
         ],
       },
       bottom: {
@@ -28,7 +30,6 @@ export class ForgotPasswordComponent {
   };
 
   handleSubmit($event:any) {
-    console.log($event);
-
+    this.authService.forgotPassword($event);
   }
 }
