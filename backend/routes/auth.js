@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const transporter = require("./transporter")
-const verifyOTP = require("./verifyOTP")
+const transporter = require("./transporter");
+const verifyOTP = require("./verifyOTP");
 
 // const jwtPrivateKey = fs.readFileSync('./rsa.pem', 'utf8');
 const jwtPrivateKey = process.env.JWTKEY;
@@ -114,7 +114,6 @@ router.put("/updateprofile", verifyToken, async(req, res, next) => {
             profilePic: req.body.profilePic,
         });
 
-
         const accessToken = jwt.sign({
                 id: user._id,
                 username: user.username,
@@ -146,7 +145,7 @@ router.post("/forgot-password", async(req, res, next) => {
 
         const createdPasswordResetOTP = await sendPasswordResetOTP(email, res);
 
-        res.status(200).json()
+        res.status(200).json();
     } catch (error) {
         next(error);
     }
@@ -202,7 +201,6 @@ function generateOTP() {
     return otp;
 }
 
-
 router.post("/reset-password", verifyOTP, async(req, res, next) => {
     const { email, newPassword } = req.body;
 
@@ -222,8 +220,30 @@ router.post("/reset-password", verifyOTP, async(req, res, next) => {
 
         res.json({ message: "Password reset successfully" });
     } catch (error) {
-        next(error)
+        next(error);
     }
 });
+
+router.get(
+    "/organizers",
+    verifyTokenAndAuthorization,
+    async(req, res, next) => {
+        const organizers = await User.find();
+
+        res.status(200).json(organizers);
+    }
+);
+
+router.delete(
+    "/organizers/:organizerId",
+    verifyTokenAndAuthorization,
+    async(req, res, next) => {
+        const organizers = await User.deleteOne({
+            _id: req.params.organizerId,
+        });
+
+        res.status(200).json({ message: "Account Deleted Successfully!" });
+    }
+);
 
 module.exports = router;

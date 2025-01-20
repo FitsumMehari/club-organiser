@@ -26,5 +26,6 @@ export class AuthorizedClubsComponent implements OnInit {
   updateclub(clubId: any) {}
   deleteclub(clubId: any) {
     this.clubsService.deleteClub(clubId)
+    window.location.reload()
   }
 }
