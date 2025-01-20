@@ -1,7 +1,10 @@
 <div class="sidebar">
     <div class="top">
         <img src="profile.svg" alt="">
-        <p>{{user.username}}</p>
+        <div>
+            <p class="user-name">{{user.username}}</p>
+            <p class="user-type">[{{user.userType}}]</p>
+        </div>
     </div>
     <ul class="middle">
         <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['status']}}]">Quick Status</a></li>
