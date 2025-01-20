@@ -67,7 +67,7 @@ router.post("/login", async(req, res, next) => {
             const user = await User.findOne({ email: req.body.email });
 
             if (!user) {
-                return res.status(401).json({ message: "Wrong Credientials!" });
+                return res.status(200).json({ message: "Wrong Credientials!" });
             }
 
             const passwordMatch = await bcrypt.compare(
@@ -76,7 +76,7 @@ router.post("/login", async(req, res, next) => {
             );
 
             if (!passwordMatch) {
-                return res.status(401).json({ message: "Wrong Credientials!" });
+                return res.status(200).json({ message: "Wrong Credientials!" });
             }
 
             const accessToken = jwt.sign({
