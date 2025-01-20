@@ -154,7 +154,7 @@ router.delete("/:clubID", verifyToken, async(req, res, next) => {
     try {
         await Club.findByIdAndDelete(req.params.clubID);
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Delete Successful!",
         });
     } catch (error) {

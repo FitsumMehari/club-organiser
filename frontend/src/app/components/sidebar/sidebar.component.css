@@ -1,0 +1,50 @@
+.sidebar {
+    background-color: #1e1e1e;
+    width: 20vw;
+    min-height: 100vh;
+    height: auto;
+    position: fixed;
+    left: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    color: #ccc;
+}
+
+.top {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+}
+
+.middle {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.middle>li {
+    margin: 1rem 0;
+}
+
+.middle>li:hover {
+    color: #fff;
+}
+
+.bottom {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: 2rem;
+}
+
+.middle .active {
+    text-decoration: underline;
+    color: #fff;
+}

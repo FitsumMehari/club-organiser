@@ -18,9 +18,17 @@ import { RequestToJoinEventComponent } from './pages/request-to-join-event/reque
 import { HomeComponent } from './pages/home/home.component';
 import { ClubsComponent } from './pages/clubs/clubs.component';
 import { EventsComponent } from './pages/events/events.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AuthorizedStatusComponent } from './pages/authorized-status/authorized-status.component';
+import { AuthorizedOrganizersComponent } from './pages/authorized-organizers/authorized-organizers.component';
+import { AuthorizedClubsComponent } from './pages/authorized-clubs/authorized-clubs.component';
+import { AuthorizedEventsComponent } from './pages/authorized-events/authorized-events.component';
+import { AuthorizedProposalsComponent } from './pages/authorized-proposals/authorized-proposals.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
+    FilterPipe,
     AppComponent,
     NavbarComponent,
     FooterComponent,
@@ -35,6 +43,12 @@ import { EventsComponent } from './pages/events/events.component';
     HomeComponent,
     ClubsComponent,
     EventsComponent,
+    SidebarComponent,
+    AuthorizedStatusComponent,
+    AuthorizedOrganizersComponent,
+    AuthorizedClubsComponent,
+    AuthorizedEventsComponent,
+    AuthorizedProposalsComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [provideHttpClient()],

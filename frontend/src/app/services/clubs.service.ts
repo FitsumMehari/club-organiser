@@ -35,4 +35,24 @@ export class ClubsService {
         (error) => {}
       );
   }
+
+  deleteClub(clubId: any) {
+    let headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`    }
+    this.http
+      .delete(`${this.apiUrl}clubs/${clubId}`, {
+        headers: headers
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '' };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{outlets: {authorized: ['clubs']}}])
+        },
+        (error) => {}
+      );
+  }
 }

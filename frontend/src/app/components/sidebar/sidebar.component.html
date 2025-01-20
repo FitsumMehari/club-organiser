@@ -1,0 +1,20 @@
+<div class="sidebar">
+    <div class="top">
+        <img src="profile.svg" alt="">
+        <div>
+            <p class="user-name">{{user.username}}</p>
+            <p class="user-type">[{{user.userType}}]</p>
+        </div>
+    </div>
+    <ul class="middle">
+        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['status']}}]">Quick Status</a></li>
+        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['organizers']}}]">Organizers</a></li>
+        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['clubs']}}]">Clubs</a></li>
+        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['events']}}]">Events</a></li>
+        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['proposals']}}]">Proposals</a></li>
+    </ul>
+    <button class="bottom" (click)="logout()">
+      <img src="logout.svg" alt="">
+      <p>Log Out</p>
+    </button>
+</div>
