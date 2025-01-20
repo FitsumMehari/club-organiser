@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  constructor(private authService: AuthService) {
+    }
   formdetails = {
     left: {
       top: {
@@ -16,8 +20,8 @@ export class LoginComponent {
     right: {
       top: {
         inputs: [
-          { label: 'Email', type: 'email' },
-          { label: 'Password', type: 'password' },        ],
+          { label: 'email', type: 'email' },
+          { label: 'password', type: 'password' },        ],
       },
       bottom: {
         left: {
@@ -37,6 +41,6 @@ export class LoginComponent {
   };
 
   handleSubmit($event:any) {
-    console.log($event);
+    this.authService.login($event);
   }
 }
