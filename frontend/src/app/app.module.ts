@@ -24,9 +24,11 @@ import { AuthorizedOrganizersComponent } from './pages/authorized-organizers/aut
 import { AuthorizedClubsComponent } from './pages/authorized-clubs/authorized-clubs.component';
 import { AuthorizedEventsComponent } from './pages/authorized-events/authorized-events.component';
 import { AuthorizedProposalsComponent } from './pages/authorized-proposals/authorized-proposals.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
+    FilterPipe,
     AppComponent,
     NavbarComponent,
     FooterComponent,
