@@ -208,7 +208,7 @@ router.delete("/club/events/:eventID", verifyToken, async(req, res, next) => {
             });
         });
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Delete Successful!",
         });
     } catch (error) {
