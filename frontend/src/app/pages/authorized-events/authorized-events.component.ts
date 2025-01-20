@@ -26,5 +26,6 @@ export class AuthorizedEventsComponent {
   updateevent(eventId: any) {}
   deleteevent(eventId: any) {
     this.eventsService.deleteEvent(eventId)
+    window.location.reload()
   }
 }
