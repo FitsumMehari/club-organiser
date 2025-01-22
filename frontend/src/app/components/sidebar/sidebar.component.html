@@ -7,11 +7,12 @@
         </div>
     </div>
     <ul class="middle">
-        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['status']}}]">Quick Status</a></li>
-        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['organizers']}}]">Organizers</a></li>
-        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['clubs']}}]">Clubs</a></li>
+        <li *ngIf="user.userType ==='admin'"><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['status']}}]">Quick Status</a></li>
+        <li *ngIf="user.userType ==='organiser'"><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['manage-club']}}]">Manage Club</a></li>
+        <li *ngIf="user.userType ==='admin'"><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['organizers']}}]">Organizers</a></li>
+        <li *ngIf="user.userType ==='admin'"><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['clubs']}}]">Clubs</a></li>
         <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['events']}}]">Events</a></li>
-        <li><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['proposals']}}]">Proposals</a></li>
+        <li *ngIf="user.userType ==='admin'"><a routerLinkActive="active" [routerLink]="[{outlets: {authorized: ['proposals']}}]">Proposals</a></li>
     </ul>
     <button class="bottom" (click)="logout()">
       <img src="logout.svg" alt="">
