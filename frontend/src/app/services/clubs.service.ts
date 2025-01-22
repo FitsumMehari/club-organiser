@@ -21,6 +21,18 @@ export class ClubsService {
     );
   }
 
+  getClubByManager() {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http.get(`${this.apiUrl}managers/club`, {headers: headers}).subscribe(
+      (next) => {
+        this._response.next(next);
+      },
+      (error) => {}
+    );
+  }
+
   joinClub(clubId: any, data: any) {
     this.http
       .post(`${this.apiUrl}clubs/requestmembership/${clubId}`, data)
@@ -38,10 +50,11 @@ export class ClubsService {
 
   deleteClub(clubId: any) {
     let headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`    }
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
     this.http
       .delete(`${this.apiUrl}clubs/${clubId}`, {
-        headers: headers
+        headers: headers,
       })
       .subscribe(
         (next) => {
@@ -50,7 +63,68 @@ export class ClubsService {
           response = next;
           alert(response.message);
           // this.router.navigate(['/clubs']);
-          this.router.navigate([{outlets: {authorized: ['clubs']}}])
+          this.router.navigate([{ outlets: { authorized: ['clubs'] } }]);
+        },
+        (error) => {}
+      );
+  }
+  updateClub(clubId: any, club:any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http
+      .put(`${this.apiUrl}clubs/${clubId}`, club, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '', newValues: {} };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['manage-club'] } }]);
+        },
+        (error) => {}
+      );
+  }
+
+  acceptMembership(clubId: any, email: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http
+      .put(`${this.apiUrl}managers/club/approvemembership/${clubId}`, {email: email}, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '', newValues: {} };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['manage-club'] } }]);
+        },
+        (error) => {}
+      );
+  }
+  removeMembership(clubId: any, email: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http
+      .put(`${this.apiUrl}managers/club/declinemembership/${clubId}`, {email: email}, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '', newValues: {} };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['manage-club'] } }]);
         },
         (error) => {}
       );

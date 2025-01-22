@@ -21,26 +21,63 @@ export class EventsService {
     );
   }
 
-  joinEvent(eventId: any, data: any) {
+  getAllEventsByOrganizer(organizerId: any) {
+    this.http.get(`${this.apiUrl}events/${organizerId}`).subscribe(
+      (next) => {
+        this._response.next(next);
+      },
+      (error) => {}
+    );
+  }
+  getOneEventById(eventId: any) {
+    this.http.get(`${this.apiUrl}events/byId/${eventId}`).subscribe(
+      (next) => {
+        this._response.next(next);
+      },
+      (error) => {}
+    );
+  }
+
+  updateEvent(eventId: any, event: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
     this.http
-      .post(`${this.apiUrl}events/reserve/${eventId}`, data)
+      .put(`${this.apiUrl}events/${eventId}`, event, {
+        headers: headers,
+      })
       .subscribe(
         (next) => {
           this._response.next(next);
-          let response: any = { message: '' };
+          let response: any = { message: '', newValues: {} };
           response = next;
           alert(response.message);
-          this.router.navigate(['/events']);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['events'] } }]);
         },
         (error) => {}
       );
   }
+
+  joinEvent(eventId: any, data: any) {
+    this.http.post(`${this.apiUrl}events/reserve/${eventId}`, data).subscribe(
+      (next) => {
+        this._response.next(next);
+        let response: any = { message: '' };
+        response = next;
+        alert(response.message);
+        this.router.navigate(['/events']);
+      },
+      (error) => {}
+    );
+  }
   deleteEvent(eventId: any) {
     let headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`    }
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
     this.http
       .delete(`${this.apiUrl}managers/club/events/${eventId}`, {
-        headers: headers
+        headers: headers,
       })
       .subscribe(
         (next) => {
@@ -49,7 +86,69 @@ export class EventsService {
           response = next;
           alert(response.message);
           // this.router.navigate(['/clubs']);
-          this.router.navigate([{outlets: {authorized: ['events']}}])
+          this.router.navigate([{ outlets: { authorized: ['events'] } }]);
+        },
+        (error) => {}
+      );
+  }
+
+  addEvent(clubId: any, event: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http
+      .post(`${this.apiUrl}managers/club/events/${clubId}`, event, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '' };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['events'] } }]);
+        },
+        (error) => {}
+      );
+  }
+
+  acceptAttendee(eventId: any, attendeeEmail: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http
+      .put(`${this.apiUrl}managers/club/event/approvereservation/${eventId}`, {email: attendeeEmail}, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '', newValues: {} };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['events'] } }]);
+        },
+        (error) => {}
+      );
+  }
+  removeAttendee(eventId: any, attendeeEmail: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+    this.http
+      .put(`${this.apiUrl}managers/club/event/declinereservation/${eventId}`, {email: attendeeEmail}, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '', newValues: {} };
+          response = next;
+          alert(response.message);
+          // this.router.navigate(['/clubs']);
+          this.router.navigate([{ outlets: { authorized: ['events'] } }]);
         },
         (error) => {}
       );
