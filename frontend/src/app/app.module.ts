@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormComponent } from './components/form/form.component';
-import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -25,6 +25,9 @@ import { AuthorizedClubsComponent } from './pages/authorized-clubs/authorized-cl
 import { AuthorizedEventsComponent } from './pages/authorized-events/authorized-events.component';
 import { AuthorizedProposalsComponent } from './pages/authorized-proposals/authorized-proposals.component';
 import { FilterPipe } from './filter.pipe';
+import { AuthorizedAddEventComponent } from './pages/authorized-add-event/authorized-add-event.component';
+import { AuthorizedAddEventDetailsComponent } from './pages/authorized-add-event-details/authorized-add-event-details.component';
+import { AuthorizedManageClubComponent } from './pages/authorized-manage-club/authorized-manage-club.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +52,11 @@ import { FilterPipe } from './filter.pipe';
     AuthorizedClubsComponent,
     AuthorizedEventsComponent,
     AuthorizedProposalsComponent,
+    AuthorizedAddEventComponent,
+    AuthorizedAddEventDetailsComponent,
+    AuthorizedManageClubComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })

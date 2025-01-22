@@ -17,6 +17,9 @@ import { AuthorizedOrganizersComponent } from './pages/authorized-organizers/aut
 import { AuthorizedClubsComponent } from './pages/authorized-clubs/authorized-clubs.component';
 import { AuthorizedEventsComponent } from './pages/authorized-events/authorized-events.component';
 import { AuthorizedProposalsComponent } from './pages/authorized-proposals/authorized-proposals.component';
+import { AuthorizedAddEventComponent } from './pages/authorized-add-event/authorized-add-event.component';
+import { AuthorizedAddEventDetailsComponent } from './pages/authorized-add-event-details/authorized-add-event-details.component';
+import { AuthorizedManageClubComponent } from './pages/authorized-manage-club/authorized-manage-club.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -49,6 +52,21 @@ const routes: Routes = [
   {
     path: 'proposals',
     component: AuthorizedProposalsComponent,
+    outlet: 'authorized',
+  },
+  {
+    path: 'add-event',
+    component: AuthorizedAddEventComponent,
+    outlet: 'authorized',
+  },
+  {
+    path: 'event-details/:eventId',
+    component: AuthorizedAddEventDetailsComponent,
+    outlet: 'authorized',
+  },
+  {
+    path: 'manage-club',
+    component: AuthorizedManageClubComponent,
     outlet: 'authorized',
   },
 ];
