@@ -28,6 +28,7 @@ z-index: 100;
                         <th scope="col">Event Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Status</th>
 
                         <th scope="col">Action</th>
                     </tr>
@@ -35,12 +36,13 @@ z-index: 100;
                 <tbody>
                     <tr *ngFor="let event of events | filter:filterInput; let i = index">
                         <th scope=" row ">{{i + 1}}</th>
-                        <td>{{event.name}}</td>
+                        <td class="cursor-pointer" style="color: #111388; font-weight: 600;" (click)="gotoDetails(event._id)">{{event.name}}</td>
                         <td>{{event.description}}</td>
                         <td>{{event.category}}</td>
+                        <td>{{event.status}}</td>
 
                         <td>
-                            <i (click)="updateevent(event._id) " class="icon icon-edit bi bi-pencil "></i>
+                            <!-- <i *ngIf="user.userType === 'organiser'" (click)="updateevent(event._id) " class="icon icon-edit bi bi-pencil "></i> -->
                             <i (click)="deleteevent(event._id) " class="icon icon-delete bi bi-trash "></i>
                         </td>
                     </tr>
@@ -50,7 +52,8 @@ z-index: 100;
 
 
         </div>
-        <div class="add-event">
-            <button class="btn btn-primary" [routerLink]="['/admin/home/add-event']">Add event</button>
+        <div *ngIf="user.userType === 'organiser'" class="add-event">
+            <!-- <button class="btn btn-primary" [routerLink]="[{outlets: {authorized: ['addevent']}}]">Add event</button> -->
+            <button class="btn btn-primary" (click)="add()">Add event</button>
         </div>
     </div>

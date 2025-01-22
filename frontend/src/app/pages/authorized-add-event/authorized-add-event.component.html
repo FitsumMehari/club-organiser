@@ -1,0 +1,49 @@
+<div class="page">
+    <div>
+        <div class="form card" style="border-radius: 15px">
+            <div class="card-body">
+                <h2 class="text-uppercase fs-4 text-center mb-3 form-title">
+                    Add Event
+                </h2>
+
+                <form #addEventForm="ngForm" (ngSubmit)="add()">
+                    <div class="form-outline mb-2">
+                        <label class=" " for="category">category</label>
+                        <select [(ngModel)]="event.category" name="category" id="category" class="form-control form-select">
+              <option class="form-control" value="undefined" >undefined</option>
+              <option class="form-control" value="social">social</option>
+              <option class="form-control" value="academic">academic</option>
+              <option class="form-control" value="management">
+                management
+              </option>
+            </select>
+                    </div>
+                    <div class="form-outline mb-2">
+                        <label class=" " for="category">category</label>
+                        <select [(ngModel)]="event.status" name="category" id="category" class="form-control form-select">
+              <option class="form-control" value="open">open</option>
+              <option class="form-control" value="closed">closed</option>
+            </select>
+                    </div>
+
+                    <div class="form-outline mb-2">
+                        <label class="" for="name">name</label>
+                        <input type="text" [(ngModel)]="event.name" name="name" id="title" class="form-control" />
+                    </div>
+                    <div class="form-outline mb-2">
+                        <label class="" for="description">description</label>
+                        <input type="text" [(ngModel)]="event.description" name="description" id="title" class="form-control" />
+                    </div>
+                    <div class="form-outline mb-2">
+                        <label class="" for="location">location</label>
+                        <input type="text" [(ngModel)]="event.location" name="location" id="title" class="form-control" />
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

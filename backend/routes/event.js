@@ -26,6 +26,35 @@ router.post("/reserve/:eventID", async(req, res, next) => {
     }
 });
 
+// Get Single event By ID Of organizer
+router.get("/:organizerID", async(req, res, next) => {
+    if (!req.params.organizerID) {
+        res.status(400).json({ message: "Invalid organizer ID!" });
+    } else {
+        try {
+            const existingEvents = await Event.find({ organiser: req.params.organizerID })
+            res.status(200).json(existingEvents);
+        } catch (error) {
+            next(error);
+        }
+    }
+});
+
+// Get Single event By ID Of event
+router.get("/byId/:eventId", async(req, res, next) => {
+    if (!req.params.eventId) {
+        res.status(200).json({ message: "Invalid event ID!" });
+    } else {
+        try {
+            // const existingEvent = await Event.find({ _id: req.params.eventId })
+            const existingEvent = await Event.findById(req.params.eventId)
+            res.status(200).json(existingEvent);
+        } catch (error) {
+            next(error);
+        }
+    }
+});
+
 // Get All Events
 router.get("/", async(req, res, next) => {
     try {
@@ -36,21 +65,7 @@ router.get("/", async(req, res, next) => {
     }
 });
 
-// Get Single event By ID Of event
-router.get("/:eventID", async(req, res, next) => {
-    if (!req.params.eventID) {
-        res.status(400).json({ message: "Invalid event ID!" });
-    } else {
-        try {
-            const existingEvent = await Event.findById(req.params.eventID)
-            res.status(200).json(existingEvent);
-        } catch (error) {
-            next(error);
-        }
-    }
-});
-
-// Update A CLub By Club ID
+// Update A event By event ID
 router.put("/:eventID", verifyToken, async(req, res, next) => {
     try {
         const updatedEvent = await Event.findByIdAndUpdate(req.params.eventID, {

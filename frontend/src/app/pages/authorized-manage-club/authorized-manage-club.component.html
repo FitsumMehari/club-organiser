@@ -1,0 +1,63 @@
+<div>
+    <div *ngIf="!clubFound" class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    <div *ngIf="clubFound" class="container">
+        <div class="header">
+            <p class="h3">Club Details {{ club.name }}</p>
+            <form #clubForm="ngForm">
+                <div class="form">
+                    <div class="col">
+                        <input type="text" class="form-control" name="name" [(ngModel)]="club.name" />
+                        <input type="text" class="form-control" name="description" [(ngModel)]="club.description" />
+                    </div>
+                    <div class="col">
+                        <select name="category" id="category" name="category" [(ngModel)]="club.category">
+            <option value="undefined">undefined</option>
+            <option value="social">social</option>
+            <option value="academic">academic</option>
+            <option value="management">management</option>
+          </select>
+                        <select name="category" id="category" name="status" [(ngModel)]="club.status">
+            <option value="open">open</option>
+            <option value="closed">closed</option>
+          </select>
+                    </div>
+                </div>
+                <button *ngIf="clubForm.dirty" (click)="updateClub(clubForm)" class="btn btn-primary">
+        Update
+      </button>
+            </form>
+        </div>
+        <div class="table">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let member of club.members; let i = index">
+                        <th scope=" row ">{{ i + 1 }}</th>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.status }}</td>
+
+                        <td>
+                            <i style="font-size: 1.2rem;" *ngIf="member.status === 'pending'" (click)="acceptMember(club._id, member.email)" class="icon icon-edit bi bi-check"></i>
+                            <i (click)="removeMember(club._id, member.email)" class="icon icon-delete bi bi-trash"></i>
+                            <p *ngIf="loading">Loading...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

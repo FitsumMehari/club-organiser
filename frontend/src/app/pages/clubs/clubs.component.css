@@ -46,6 +46,44 @@
 }
 
 .clubs>.club {
+    padding-top: 1rem;
     margin: .5rem;
     cursor: pointer;
+    border: 1px solid #00d4fc;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.clubs>.club>a {
+    font-size: 1rem;
+    color: black;
+    background-color: #038eaa;
+    padding: .5rem 1rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.clubs>.club>p {
+    color: #d4d3d3;
+    align-self: flex-start;
+    margin-left: 4rem;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.description {
+    font-size: .8rem;
+}
+
+.clubs>.club>a:hover {
+    background-color: #00d4fc;
+}
+
+.clubs>.club>img {
+    width: 60%
 }

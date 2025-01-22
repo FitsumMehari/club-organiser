@@ -14,8 +14,12 @@
     </div>
     <div class="events">
         <div class="event" *ngFor="let event of allEvents">
-            <img *ngIf="event.image" routerLink="/reserve-ticket/{{event._id}}" src="{{event.image}}" alt="">
-            <img *ngIf="!event.image" routerLink="/reserve-ticket/{{event._id}}" src="image7.svg" alt="">
+            <img *ngIf="event.image" src="{{event.image}}" alt="">
+            <img *ngIf="!event.image" src="image7.svg" alt="">
+            <p>{{event.status}}</p>
+            <p class="title">{{event.name}}</p>
+            <p class="description">{{event.description}}</p>
+            <a *ngIf="event.status ==='open'" routerLink="/reserve-ticket/{{event._id}}">Attend</a>
         </div>
     </div>
 </div>
