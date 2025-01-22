@@ -14,8 +14,12 @@
     </div>
     <div class="clubs">
         <div class="club" *ngFor="let club of allClubs">
-            <img *ngIf="club.image" routerLink="/join-club/{{club._id}}" src="{{club.image}}" alt="">
-            <img *ngIf="!club.image" routerLink="/join-club/{{club._id}}" src="image6.svg" alt="">
+            <img *ngIf="club.image" src="{{club.image}}" alt="">
+            <img *ngIf="!club.image" src="image6.svg" alt="">
+            <p>{{club.status}}</p>
+            <p class="title">{{club.name}}</p>
+            <p class="description">{{club.description}}</p>
+            <a *ngIf="club.status ==='open'" routerLink="/join-club/{{club._id}}">Attend</a>
         </div>
     </div>
 </div>
