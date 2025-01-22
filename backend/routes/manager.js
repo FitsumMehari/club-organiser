@@ -8,6 +8,9 @@ const Event = require("../models/Event");
 const { verifyToken } = require("./verifyToken");
 
 const transporter = require("./transporter");
+const QRCode = require("qrcode");
+const fs = require("fs");
+const path = require("path");
 
 // Get Single Club By ID Of Manager
 router.get("/club", verifyToken, async(req, res, next) => {
@@ -78,7 +81,7 @@ router.put(
                     (member) => member.email === req.body.email
                 );
                 if (pendingRequest) {
-                    club.members.splice(club.members.indexOf(pendingRequest), 1)
+                    club.members.splice(club.members.indexOf(pendingRequest), 1);
                     await club.save();
                     return res
                         .status(200)
@@ -107,11 +110,13 @@ router.get(
                 const club = await Club.findById(req.params.clubID);
 
                 if (club.members.length > 0) {
-                    const members = club.members
-                    return res.status(200).json({ message: "Membership requests found", members });
+                    const members = club.members;
+                    return res
+                        .status(200)
+                        .json({ message: "Membership requests found", members });
                 } else {
                     return res.status(400).json({
-                        message: "Membership requests not found!"
+                        message: "Membership requests not found!",
                     });
                 }
             } catch (error) {
@@ -123,7 +128,6 @@ router.get(
     }
 );
 
-
 // See reservation requests to an event using eventID
 router.get(
     "/club/event/reservations/:eventID",
@@ -134,11 +138,13 @@ router.get(
                 const event = await Event.findById(req.params.eventID);
 
                 if (event.attendees.length > 0) {
-                    const attendees = event.attendees
-                    return res.status(200).json({ message: "Reservation requests found", attendees });
+                    const attendees = event.attendees;
+                    return res
+                        .status(200)
+                        .json({ message: "Reservation requests found", attendees });
                 } else {
                     return res.status(400).json({
-                        message: "Reservation requests not found!"
+                        message: "Reservation requests not found!",
                     });
                 }
             } catch (error) {
@@ -225,26 +231,75 @@ router.put(
             try {
                 const event = await Event.findById(req.params.eventID);
 
-                const mailOptions = {
+                let mailOptions = {
                     from: process.env.OTP_EMAIL,
                     to: req.body.email,
-                    subject: "Membership Request",
+                    subject: "Event Ticket",
                     text: `Your request to reserve a ticket ${event.name} event has been approved by the managers.`,
+                    attachDataUrls: true,
+                    attachments: [],
                 };
 
                 const pendingRequest = event.attendees.find(
                     (attendee) => attendee.email === req.body.email
                 );
+
                 if (pendingRequest) {
+                    // move this code to its own file
+                    let data = JSON.stringify({
+                        eventName: event.name,
+                        attendeeEmail: pendingRequest.email,
+                        attendeeName: pendingRequest.name,
+                        _id: pendingRequest._id,
+                    });
+
+                    // Options for QR code generation
+                    const options = {
+                        errorCorrectionLevel: "H",
+                        type: "image/png",
+                        quality: 0.92,
+                        margin: 1,
+                        color: {
+                            dark: "#000000",
+                            light: "#FFFFFF",
+                        },
+                    };
+                    let imageFileName = `${pendingRequest.email}.png`
+                        // Generate QR code and save as image
+                    QRCode.toFile(
+                        path.join(__dirname, imageFileName),
+                        data,
+                        options,
+                        function(err) {
+                            if (err) throw err;
+                            console.log("QR code saved!");
+                        }
+                    );
+
+                    mailOptions.attachments.push({
+                        // filename: imageFileName,
+                        path: path.join(__dirname, imageFileName),
+                        // cid: "qrcode",
+                    });
+
                     pendingRequest.status = "accepted";
                     await event.save();
+
                     await transporter.sendMail(mailOptions);
+                    try {
+                        fs.rmSync(path.join(__dirname, imageFileName))
+                    } catch (error) {
+                        console.log(error);
+
+                    }
+
                     return res
                         .status(200)
                         .json({ message: "Reservation request approved!" });
+
                 }
 
-                res.status(400).json({
+                res.status(200).json({
                     message: "Request not found!",
                 });
             } catch (error) {
@@ -268,8 +323,9 @@ router.put(
                 const pendingRequest = event.attendees.find(
                     (attendee) => attendee.email === req.body.email
                 );
+
                 if (pendingRequest) {
-                    event.attendees.splice(event.attendees.indexOf(pendingRequest), 1)
+                    event.attendees.splice(event.attendees.indexOf(pendingRequest), 1);
                     await event.save();
                     return res
                         .status(200)
@@ -287,6 +343,5 @@ router.put(
         }
     }
 );
-
 
 module.exports = router;
