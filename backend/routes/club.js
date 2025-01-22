@@ -6,7 +6,8 @@ dotenv.config();
 const Club = require("../models/Club");
 const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 
-const nodemailer = require("nodemailer");
+const transporter = require("./transporter");
+
 
 // Add New Club
 router.post("/", verifyTokenAndAuthorization, async(req, res, next) => {
@@ -74,16 +75,6 @@ router.get("/:clubID", async(req, res, next) => {
 // Update A CLub By Club ID
 router.put("/:clubID", verifyToken, async(req, res, next) => {
     try {
-        const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
-            name: req.body.name,
-            category: req.body.category,
-            description: req.body.description,
-            managers: req.body.managers,
-            members: req.body.members,
-            status: req.body.status,
-            logo: req.body.logo,
-            location: req.body.location,
-        });
 
         const newValues = await Club.findOne(req.body.id);
 

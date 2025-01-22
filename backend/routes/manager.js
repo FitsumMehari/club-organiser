@@ -287,6 +287,7 @@ router.put(
 
                     await transporter.sendMail(mailOptions);
                     try {
+                        // remove the generated image 
                         fs.rmSync(path.join(__dirname, imageFileName))
                     } catch (error) {
                         console.log(error);
