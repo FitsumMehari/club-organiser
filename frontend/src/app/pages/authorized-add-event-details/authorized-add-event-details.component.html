@@ -1,0 +1,63 @@
+<div>
+    <div *ngIf="!eventFound" class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    <div *ngIf="eventFound" class="container">
+        <div class="header">
+            <p class="h3">Event Details {{ event.name }}</p>
+            <form #eventForm="ngForm">
+                <div class="form">
+                    <div class="col">
+                        <input type="text" class="form-control" name="name" [(ngModel)]="event.name" />
+                        <input type="text" class="form-control" name="description" [(ngModel)]="event.description" />
+                    </div>
+                    <div class="col">
+                        <select name="category" id="category" name="category" [(ngModel)]="event.category">
+              <option value="undefined">undefined</option>
+              <option value="social">social</option>
+              <option value="academic">academic</option>
+              <option value="management">management</option>
+            </select>
+                        <select name="category" id="category" name="status" [(ngModel)]="event.status">
+              <option value="open">open</option>
+              <option value="closed">closed</option>
+            </select>
+                    </div>
+                </div>
+                <button *ngIf="eventForm.dirty" (click)="updateEvent(eventForm)" class="btn btn-primary">
+          Update
+        </button>
+            </form>
+        </div>
+        <div class="table">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let attendee of event.attendees; let i = index">
+                        <th scope=" row ">{{ i + 1 }}</th>
+                        <td>{{ attendee.name }}</td>
+                        <td>{{ attendee.email }}</td>
+                        <td>{{ attendee.status }}</td>
+
+                        <td>
+                            <i style="font-size: 1.2rem;" *ngIf="attendee.status === 'pending'" (click)="acceptAttendee(event._id, attendee.email)" class="icon icon-edit bi bi-check"></i>
+                            <i (click)="removeAttendee(event._id, attendee.email)" class="icon icon-delete bi bi-trash"></i>
+                            <p *ngIf="loading">Loading...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
