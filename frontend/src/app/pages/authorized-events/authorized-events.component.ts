@@ -1,20 +1,46 @@
 import { Component } from '@angular/core';
 import { EventsService } from '../../services/events.service';
+import { AuthService } from '../../services/auth.service';
+import { ClubsService } from '../../services/clubs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authorized-events',
   templateUrl: './authorized-events.component.html',
-  styleUrl: './authorized-events.component.css'
+  styleUrl: './authorized-events.component.css',
 })
 export class AuthorizedEventsComponent {
- constructor(private eventsService: EventsService) {}
+  constructor(
+    private eventsService: EventsService,
+    private authService: AuthService,
+    private clubService: ClubsService,
+    private router: Router
+  ) {}
 
+  club: any;
+  user: any;
   events: any;
   eventsFound: boolean = false;
   filterInput: any;
 
   ngOnInit(): void {
-    this.eventsService.getAllEvents();
+    this.authService._user.subscribe((next) => {
+      this.user = next;
+    });
+
+    if (this.user.userType === 'admin') {
+      this.eventsService.getAllEvents();
+    } else if (this.user.userType === 'organiser') {
+      this.clubService.getClubByManager();
+
+      this.clubService._response.subscribe((next) => {
+        this.club = {...next};
+        if(!!this.club._id) {
+          this.eventsService.getAllEventsByOrganizer(this.club._id);
+        }
+      });
+
+    }
     this.eventsService._response.subscribe((next) => {
       if (next) {
         this.eventsFound = true;
@@ -25,7 +51,15 @@ export class AuthorizedEventsComponent {
 
   updateevent(eventId: any) {}
   deleteevent(eventId: any) {
-    this.eventsService.deleteEvent(eventId)
-    window.location.reload()
+    this.eventsService.deleteEvent(eventId);
+    window.location.reload();
+  }
+
+  gotoDetails(eventId: any){
+    this.router.navigate([{outlets: {authorized: ['event-details', eventId]}}])
+  }
+
+  add() {
+    this.router.navigate([{outlets: {authorized: ['add-event']}}])
   }
 }
