@@ -1,1 +1,39 @@
-<p>authorized-proposals works!</p>
+<div class="page">
+    <div *ngFor="let proposal of proposals" class="proposal">
+        <div class="organiser">
+            <h3>Organiser Details</h3>
+            <div class="details">
+                <p>Username: </p>
+                <p class="detail">{{proposal.organiser.username}}</p>
+            </div>
+            <div class="details">
+                <p>Email: </p>
+                <p class="detail">{{proposal.organiser.email}}</p>
+            </div>
+            <div class="details">
+                <p>Phone: </p>
+                <p class="detail">{{proposal.organiser.phone}}</p>
+            </div>
+        </div>
+        <div class="club">
+            <h3>Club Details</h3>
+            <div class="details">
+                <p>Name: </p>
+                <p class="detail">{{proposal.club.name}}</p>
+            </div>
+            <div class="details">
+                <p>Category: </p>
+                <p class="detail">{{proposal.club.category}}</p>
+            </div>
+            <div class="details">
+                <p>Description: </p>
+                <p class="detail">{{proposal.club.description}}</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <p *ngIf="loading">Loading...</p>
+            <button (click)="acceptProposal(proposal._id)" class="btn btn-primary">Accept</button>
+            <button (click)="rejectProposal(proposal._id)" class="btn btn-danger">Reject</button>
+        </div>
+    </div>
+</div>

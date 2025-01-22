@@ -1,0 +1,51 @@
+.page,
+.organiser,
+.club,
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.proposal {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    min-width: 35rem;
+    width: auto;
+    height: 10rem;
+    border: 1px solid #00d4fc;
+    background-color: #d7f8ff;
+    border-radius: .5rem;
+}
+
+h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: .2rem;
+    font-size: .8rem;
+}
+
+.detail {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.details {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+}
+
+button {
+    padding: .5rem 1rem;
+    width: 7rem;
+    margin: 1rem;
+}

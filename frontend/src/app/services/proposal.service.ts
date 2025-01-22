@@ -38,4 +38,61 @@ export class ProposalService {
       (error) => {}
     );
   }
+
+  getAllProposals() {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    this.http.get(`${this.apiUrl}proposals`, { headers: headers }).subscribe(
+      (next) => {
+        this._response.next(next);
+      },
+      (error) => {}
+    );
+  }
+
+  acceptProposal(proposalId: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    console.log(proposalId);
+
+
+    this.http
+      .post(`${this.apiUrl}proposals/acceptProposal/${proposalId}`, {
+        headers: headers,
+      })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '' };
+          response = next;
+          alert(response.message);
+          this.router.navigate([{ outlets: { authorized: ['proposals'] } }]);
+          window.location.reload();
+        },
+        (error) => {}
+      );
+  }
+  rejectProposal(proposalId: any) {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    this.http
+      .delete(`${this.apiUrl}proposals/${proposalId}`, { headers: headers })
+      .subscribe(
+        (next) => {
+          this._response.next(next);
+          let response: any = { message: '' };
+          response = next;
+          alert(response.message);
+          this.router.navigate([{ outlets: { authorized: ['proposals'] } }]);
+          window.location.reload();
+        },
+        (error) => {}
+      );
+  }
 }
