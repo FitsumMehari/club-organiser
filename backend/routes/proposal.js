@@ -4,7 +4,7 @@ const Club = require("../models/Club");
 const User = require("../models/User");
 const { verifyToken } = require("./verifyToken");
 const bcrypt = require("bcrypt");
-const transporter = require('./transporter');
+const transporter = require("./transporter");
 router.post("", async(req, res, next) => {
     try {
         const proposal = {
@@ -20,6 +20,18 @@ router.post("", async(req, res, next) => {
                 description: req.body.club.description,
             },
         };
+
+        const existingOrganiserByEmail = await User.findOne({
+            email: proposal.organiser.email,
+        });
+
+        if (!!existingOrganiserByEmail) {
+            return res
+                .status(200)
+                .json({
+                    message: "A club exists under this email, contact admins to remove it first before appyling for a new one.",
+                });
+        }
 
         const newProposal = new Proposal({
             ...proposal,
@@ -39,8 +51,6 @@ router.post("/acceptProposal/:proposalID", async(req, res, next) => {
         res.status(200).json({ message: "Invalid proposal ID!" });
     } else {
         try {
-            console.log(req.params.proposalID);
-
             const existingProposal = await Proposal.findById(req.params.proposalID);
             const existingClub = await Club.findOne({
                 name: existingProposal.club.name,
@@ -97,7 +107,7 @@ router.post("/acceptProposal/:proposalID", async(req, res, next) => {
             await transporter.sendMail(mailOptions);
 
             res.status(200).json({
-                message: "Club and account created succefully! Default password=12345",
+                message: "Club and account created succefully!",
                 newClub,
                 otherSavedUserInfo,
             });

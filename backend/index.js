@@ -14,6 +14,10 @@ app.use(cors()); // Use the cors middleware with your options
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("index.html");
+});
+
 const authRoute = require("./routes/auth");
 const clubRoute = require("./routes/club");
 const managerRoute = require("./routes/manager");
