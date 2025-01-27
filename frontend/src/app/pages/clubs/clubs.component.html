@@ -1,21 +1,28 @@
 <div class="page">
     <div class="top">
-        <input type="text" placeholder="search">
+        <input type="text" placeholder="Search" name="filterInput" [(ngModel)]="filterInput">
         <ul class="buttons">
-            <li><a routerLink="">Social</a></li>
-            <li><a routerLink="">Academic</a></li>
-            <li><a routerLink="">Managemnt</a></li>
-            <li><a routerLink="">Undefined</a></li>
-            <li><a routerLink="">Social</a></li>
-            <li><a routerLink="">Academic</a></li>
-            <li><a routerLink="">Managemnt</a></li>
-            <li><a routerLink="">Undefined</a></li>
+            <li>
+                <button (click)="filterClubs('social')">Social</button>
+            </li>
+            <li>
+                <button (click)="filterClubs('academic')">Academic</button>
+            </li>
+            <li>
+                <button (click)="filterClubs('management')">Management</button>
+            </li>
+            <li>
+                <button (click)="filterClubs('undefined')">Undefined</button>
+            </li>
+            <li>
+                <button (click)="setClubs()">All</button>
+            </li>
         </ul>
     </div>
     <div class="clubs">
-        <div class="club" *ngFor="let club of allClubs">
-            <img *ngIf="club.image" src="{{club.image}}" alt="">
-            <img *ngIf="!club.image" src="image6.svg" alt="">
+        <div class="club" *ngFor="let club of allClubs | filter:filterInput">
+            <img *ngIf="club.logo" src="{{club.logo}}" alt="">
+            <img *ngIf="!club.logo" src="image6.svg" alt="">
             <p>{{club.status}}</p>
             <p class="title">{{club.name}}</p>
             <p class="description">{{club.description}}</p>

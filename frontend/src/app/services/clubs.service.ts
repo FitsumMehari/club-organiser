@@ -83,7 +83,10 @@ export class ClubsService {
           response = next;
           alert(response.message);
           // this.router.navigate(['/clubs']);
+
+          this.getClubByManager()
           this.router.navigate([{ outlets: { authorized: ['manage-club'] } }]);
+
         },
         (error) => {}
       );

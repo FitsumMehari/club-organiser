@@ -2,20 +2,27 @@
     <div class="top">
         <input type="text" placeholder="search">
         <ul class="buttons">
-            <li><a routerLink="">Social</a></li>
-            <li><a routerLink="">Academic</a></li>
-            <li><a routerLink="">Managemnt</a></li>
-            <li><a routerLink="">Undefined</a></li>
-            <li><a routerLink="">Social</a></li>
-            <li><a routerLink="">Academic</a></li>
-            <li><a routerLink="">Managemnt</a></li>
-            <li><a routerLink="">Undefined</a></li>
+            <li>
+                <button (click)="filterEvents('social')">Social</button>
+            </li>
+            <li>
+                <button (click)="filterEvents('academic')">Academic</button>
+            </li>
+            <li>
+                <button (click)="filterEvents('management')">Management</button>
+            </li>
+            <li>
+                <button (click)="filterEvents('undefined')">Undefined</button>
+            </li>
+            <li>
+                <button (click)="setEvents()">All</button>
+            </li>
         </ul>
     </div>
     <div class="events">
         <div class="event" *ngFor="let event of allEvents">
-            <img *ngIf="event.image" src="{{event.image}}" alt="">
-            <img *ngIf="!event.image" src="image7.svg" alt="">
+            <img *ngIf="event.logo" src="{{event.logo}}" alt="">
+            <img *ngIf="!event.logo" src="image7.svg" alt="">
             <p>{{event.status}}</p>
             <p class="title">{{event.name}}</p>
             <p class="description">{{event.description}}</p>

@@ -15,6 +15,20 @@ export class EventsComponent {
       this.eventsService.getAllEvents();
       this.eventsService._response.subscribe((next) => {
         this.allEvents = next;
+        this.setEvents()
       });
     }
+
+     filterEvents(category: any) {
+
+       this.setEvents()
+      this.allEvents = this.allEvents.filter((club:any) => club.category === category)
+    }
+
+    setEvents() {
+       this.eventsService._response.subscribe( (next) => {
+         this.allEvents = next;
+      });
+    }
+
 }

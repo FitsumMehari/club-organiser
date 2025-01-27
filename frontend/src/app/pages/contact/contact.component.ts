@@ -24,10 +24,10 @@ export class ContactComponent implements OnInit {
     right: {
       top: {
         inputs: [
-          { label: 'First-Name', type: 'text' },
-          { label: 'Last-Name', type: 'text' },
+          { label: 'FirstName', type: 'text' },
+          { label: 'LastName', type: 'text' },
           { label: 'Email', type: 'email' },
-          { label: 'Phone-Number', type: 'tel' },
+          { label: 'PhoneNumber', type: 'tel' },
           { label: 'Message', type: 'text' },
         ],
       },
@@ -42,6 +42,30 @@ ngOnInit(): void {
 
 }
   handleSubmit($event:any) {
-    console.log($event);
+
+    if($event.PhoneNumber.match(/[a-z]/i) || $event.PhoneNumber == ''){
+      alert("Invalid Phone Number")
+    }
+    else if(!$event.Email.match(/[@]/) || $event.Email == ''){
+      alert("Invalid Email")
+    }
+    else if($event.FirstName == ''){
+      alert("Invalid First Name")
+    }
+    else if($event.LastName == ''){
+      alert("Invalid Last Name")
+    }
+    else if($event.Message == ''){
+      alert("Invalid Message")
+    }
+    else {
+      alert("Thank you for your message!")
+      window.location.reload()
+      // console.log($event.FirstName);
+      // console.log($event.LastName);
+      // console.log($event.Email);
+      // console.log($event.PhoneNumber);
+      // console.log($event.Message);
+    }
   }
 }

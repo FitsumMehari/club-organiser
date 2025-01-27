@@ -37,6 +37,7 @@ export class AuthorizedManageClubComponent {
   }
   updateClub(clubForm: any) {
     this.clubService.updateClub(this.club._id, clubForm.value);
+    this.getClub()
   }
 
   acceptMember(clubId: any, email: any) {

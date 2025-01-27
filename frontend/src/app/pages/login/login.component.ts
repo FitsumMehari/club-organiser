@@ -41,6 +41,13 @@ export class LoginComponent {
   };
 
   handleSubmit($event:any) {
-    this.authService.login($event);
+    if($event.email == '' || !$event.email.match(/[@]/)) {
+      alert("Invalid Email")
+    }
+    else if($event.password == '') {
+      alert("Invalid Password")
+    } else {
+      this.authService.login($event);
+    }
   }
 }
