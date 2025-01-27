@@ -22,7 +22,7 @@ export class ProposalService {
         password: data.password,
       },
       club: {
-        name: data.name,
+        name: data.clubname,
         category: data.category,
         description: data.description,
       },
@@ -57,15 +57,13 @@ export class ProposalService {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
 
-    console.log(proposalId);
-
-
     this.http
       .post(`${this.apiUrl}proposals/acceptProposal/${proposalId}`, {
         headers: headers,
       })
       .subscribe(
         (next) => {
+          this.rejectProposal(proposalId);
           this._response.next(next);
           let response: any = { message: '' };
           response = next;
