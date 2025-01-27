@@ -30,6 +30,12 @@ export class ForgotPasswordComponent {
   };
 
   handleSubmit($event:any) {
-    this.authService.forgotPassword($event);
+    if($event.email == '' || !$event.email.match(/[@]/)) {
+      alert("Invalid Email")
+    }
+    else {
+      this.authService.forgotPassword($event);
+
+    }
   }
 }
