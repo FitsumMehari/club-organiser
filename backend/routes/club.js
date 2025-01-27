@@ -130,7 +130,7 @@ router.post("/requestmembership/:clubID", async(req, res, next) => {
 
             const existingRequest = club.members.find(member => member.email === req.body.email);
             if (existingRequest) {
-                return res.status(400).json({ message: 'Member request already exists' });
+                return res.status(200).json({ message: 'Member request already exists' });
             }
 
             club.members.push({ name: req.body.name, email: req.body.email, status: "pending" });
