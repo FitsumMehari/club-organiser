@@ -75,8 +75,14 @@ router.get("/:clubID", async(req, res, next) => {
 // Update A CLub By Club ID
 router.put("/:clubID", verifyToken, async(req, res, next) => {
     try {
+        const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
+            name: req.body.name,
+            category: req.body.category,
+            description: req.body.description,
+            status: req.body.status,
+        });
 
-        const newValues = await Club.findOne(req.body.id);
+        const newValues = await Club.findOne(updatedClub._id);
 
         res.status(200).json({
             message: "Update Successful!",
