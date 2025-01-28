@@ -6,7 +6,8 @@
     </div>
     <div *ngIf="clubFound" class="container">
         <div class="header">
-            <p class="h3">Club Details {{ club.name }}</p>
+            <p class="h3"> {{ club.name }}</p>
+            <p class="h3" style="font-size: 1rem;">Club Details</p>
             <form #clubForm="ngForm">
                 <div class="form">
                     <div class="col">

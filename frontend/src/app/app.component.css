@@ -6,7 +6,12 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    background-color: #1e1e1e;
+    background-color: hsl(0, 0%, 12%);
+}
+
+.content {
+    height: auto;
+    overflow-y: scroll;
 }
 
 .authorized-page {
@@ -26,4 +31,5 @@ app-navbar {
 
 app-footer {
     margin-top: 2rem;
+    align-self: flex-end;
 }

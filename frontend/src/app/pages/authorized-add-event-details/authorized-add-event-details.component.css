@@ -22,6 +22,10 @@
     flex-direction: column;
 }
 
+.header p {
+    padding-left: 1rem;
+}
+
 .col {
     display: flex;
     justify-content: start;

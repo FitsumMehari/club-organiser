@@ -19,7 +19,12 @@
             </li>
         </ul>
     </div>
-    <div class="clubs">
+    <div *ngIf="!clubsFound" class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    <div *ngIf="clubsFound" class="clubs">
         <div class="club" *ngFor="let club of allClubs | filter:filterInput">
             <img *ngIf="club.logo" src="{{club.logo}}" alt="">
             <img *ngIf="!club.logo" src="image6.svg" alt="">
