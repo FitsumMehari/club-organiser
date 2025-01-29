@@ -1,24 +1,13 @@
-<div>
+<div class="page">
     <div *ngIf="!eventsFound" class="spinner-container">
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only"></span>
         </div>
     </div>
     <div *ngIf="eventsFound" class="container">
-        <div class="header">
-            <p class="h3">Events</p>
-            <div class="mb-4 search-box" style="position: relative">
-                <input type="text" id="textInput" placeholder="Enter data to filter by" class="form-control" name="filterInput" [(ngModel)]="filterInput" />
-                <i class="fa-solid fa-filter" style="
-cursor: pointer;
-position: absolute;
-top: 0.6rem;
-right: 0.7rem;
-z-index: 100;
-"></i>
-
-                <label class="form-label" for="textInput">Filter</label>
-            </div>
+        <div class="search-box">
+            <h2>Events</h2>
+            <input type="text" id="textInput" placeholder="Enter data to filter by" class="form-control" name="filterInput" [(ngModel)]="filterInput" />
         </div>
         <div class="table">
             <table class="table">
@@ -36,14 +25,14 @@ z-index: 100;
                 </thead>
                 <tbody>
                     <tr *ngFor="let event of events | filter:filterInput; let i = index">
-                        <th scope=" row ">{{i + 1}}</th>
-                        <td class="cursor-pointer" style="color: #111388; font-weight: 600;" (click)="gotoDetails(event._id)">{{event.name}}</td>
-                        <td>{{event.description}}</td>
-                        <td>{{event.category}}</td>
-                        <td>{{event.status}}</td>
-                        <td>{{event.location}}</td>
+                        <th [ngClass]="{'grey-body': i%2==0}" scope=" row ">{{i + 1}}</th>
+                        <td [ngClass]="{'grey-body': i%2==0}" class="event-name-link" (click)="gotoDetails(event._id)">{{event.name}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{event.description}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{event.category}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{event.status}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{event.location}}</td>
 
-                        <td>
+                        <td [ngClass]="{'grey-body': i%2==0}">
                             <!-- <i *ngIf="user.userType === 'organiser'" (click)="updateevent(event._id) " class="icon icon-edit bi bi-pencil "></i> -->
                             <i (click)="deleteevent(event._id) " class="icon icon-delete bi bi-trash "></i>
                         </td>

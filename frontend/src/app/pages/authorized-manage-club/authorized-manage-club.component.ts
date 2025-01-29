@@ -13,6 +13,7 @@ export class AuthorizedManageClubComponent {
     private clubService: ClubsService
   ) {}
 
+  filterInput: any;
   club: any = {
     name: '',
     description: '',
