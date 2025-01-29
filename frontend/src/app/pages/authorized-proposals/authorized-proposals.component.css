@@ -1,7 +1,38 @@
-.page,
-.organiser,
-.club,
-.buttons {
+.page {
+    width: 78vw;
+    margin-left: 20vw;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+h2 {
+    font-weight: 700;
+    /* margin-bottom: 1rem; */
+}
+
+.search-box {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+input,
+select {
+    width: 50%;
+    font-size: 0.8rem;
+    background-color: #eaeaea;
+}
+
+.proposals {
+    width: 100%;
+    height: 80vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -9,22 +40,55 @@
 }
 
 .proposal {
-    margin: 1rem;
+    margin: .5rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    min-width: 35rem;
-    width: auto;
+    width: 99%;
     height: 10rem;
-    border: 1px solid #00d4fc;
-    background-color: #d7f8ff;
+    /* border: 1px solid #a9dae4; */
+    background-color: #e5ebee;
     border-radius: .5rem;
+    /* border: 5px solid red; */
 }
 
-h3 {
-    font-weight: 700;
-    margin-bottom: 1rem;
+.organiser {
+    margin-left: 1rem;
+}
+
+.club {
+    /* margin-left: 2rem; */
+}
+
+.organiser,
+.club,
+.buttons {
+    width: 60rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    /* border: 1px solid red; */
+}
+
+.buttons {
+    /* justify-self: end; */
+    /* margin-left: auto; */
+    /* text-decoration: underline; */
+    width: 20rem;
+    font-weight: 600;
+}
+
+.buttons i {
+    margin-right: .1rem;
+}
+
+.buttons .accept-btn {
+    color: rgb(117, 235, 117);
+}
+
+.buttons .reject-btn {
+    color: rgb(236, 78, 78);
 }
 
 p {
@@ -32,9 +96,22 @@ p {
     font-size: .8rem;
 }
 
+.organizer-title,
+.club-title {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+p {
+    letter-spacing: .05rem;
+}
+
 .detail {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: .8rem;
+    font-weight: 500;
+    /* text-decoration: underline; */
+    color: #262152;
+    letter-spacing: 0rem;
 }
 
 .details {

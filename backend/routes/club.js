@@ -80,6 +80,7 @@ router.put("/:clubID", verifyToken, async(req, res, next) => {
             category: req.body.category,
             description: req.body.description,
             status: req.body.status,
+            location: req.body.location,
         });
 
         const newValues = await Club.findOne(updatedClub._id);

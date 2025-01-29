@@ -8,7 +8,7 @@
 
                 <form #addEventForm="ngForm" (ngSubmit)="add()">
                     <div class="form-outline mb-2">
-                        <label class=" " for="category">category</label>
+                        <label class=" " for="category">category*</label>
                         <select [(ngModel)]="event.category" name="category" id="category" class="form-control form-select">
               <option class="form-control" value="undefined" >undefined</option>
               <option class="form-control" value="social">social</option>
@@ -19,24 +19,28 @@
             </select>
                     </div>
                     <div class="form-outline mb-2">
-                        <label class=" " for="category">category</label>
-                        <select [(ngModel)]="event.status" name="category" id="category" class="form-control form-select">
+                        <label class=" " for="status">status*</label>
+                        <select [(ngModel)]="event.status" name="status" id="status" class="form-control form-select">
               <option class="form-control" value="open">open</option>
               <option class="form-control" value="closed">closed</option>
             </select>
                     </div>
 
                     <div class="form-outline mb-2">
-                        <label class="" for="name">name</label>
-                        <input type="text" [(ngModel)]="event.name" name="name" id="title" class="form-control" />
+                        <label class="" for="name">name*</label>
+                        <input type="text" [(ngModel)]="event.name" name="name" id="name" class="form-control" />
                     </div>
                     <div class="form-outline mb-2">
-                        <label class="" for="description">description</label>
-                        <input type="text" [(ngModel)]="event.description" name="description" id="title" class="form-control" />
+                        <label class="" for="description">description*</label>
+                        <input type="text" [(ngModel)]="event.description" name="description" id="description" class="form-control" />
                     </div>
                     <div class="form-outline mb-2">
-                        <label class="" for="location">location</label>
-                        <input type="text" [(ngModel)]="event.location" name="location" id="title" class="form-control" />
+                        <label class="" for="location">location*</label>
+                        <input type="text" [(ngModel)]="event.location" name="location" id="location" class="form-control" />
+                    </div>
+                    <div class="form-outline mb-2">
+                        <label class="" for="location">logo*</label>
+                        <input type="file" [(ngModel)]="event.logo" name="logo" id="logo" class="form-control" />
                     </div>
 
                     <div class="mt-2">

@@ -10,6 +10,7 @@ export class AuthorizedProposalsComponent implements OnInit {
   constructor(private proposalService: ProposalService) {}
   proposals: any = [];
   loading: boolean = false;
+  filterInput: any;
   ngOnInit(): void {
     this.proposalService.getAllProposals();
     this.proposalService._response.subscribe((next) => {
