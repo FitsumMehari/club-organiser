@@ -28,6 +28,7 @@ import { FilterPipe } from './filter.pipe';
 import { AuthorizedAddEventComponent } from './pages/authorized-add-event/authorized-add-event.component';
 import { AuthorizedAddEventDetailsComponent } from './pages/authorized-add-event-details/authorized-add-event-details.component';
 import { AuthorizedManageClubComponent } from './pages/authorized-manage-club/authorized-manage-club.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AuthorizedManageClubComponent } from './pages/authorized-manage-club/au
     AuthorizedAddEventDetailsComponent,
     AuthorizedManageClubComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, FileUploadModule],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
