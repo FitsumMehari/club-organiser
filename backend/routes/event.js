@@ -2,6 +2,23 @@ const router = require("express").Router();
 const Event = require("../models/Event");
 const { verifyToken } = require("./verifyToken")
 
+const fs = require("fs");
+const path = require("path")
+const cloudinaryFileUpload = require("./cloudinaryFileUpload")
+const multer = require('multer');
+
+// Configure Multer for file upload handling
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+const upload = multer({ storage: storage })
+
+
 // Update A CLub By Club ID When A Request To Be A Member is Accepted By The Club Managers
 router.post("/reserve/:eventID", async(req, res, next) => {
     if (req.params.eventID) {
@@ -66,18 +83,45 @@ router.get("/", async(req, res, next) => {
 });
 
 // Update A event By event ID
-router.put("/:eventID", verifyToken, async(req, res, next) => {
-    try {
+router.put("/:eventID", verifyToken, upload.single("logo"), async(req, res, next) => {
+    let event = JSON.parse(req.body.event)
+
+    if (req.file) {
+        const tempfileName = req.file.originalname;
+        const tempfileURL = req.file.path;
+        const tempsavedFile = await cloudinaryFileUpload.setSavedFile(tempfileName, tempfileURL);
+
         const updatedEvent = await Event.findByIdAndUpdate(req.params.eventID, {
-            name: req.body.name,
-            category: req.body.category,
-            description: req.body.description,
-            organiser: req.body.organiser,
-            attendees: req.body.attendees,
-            status: req.body.status,
-            logo: req.body.logo,
-            location: req.body.location,
-            date: req.body.date,
+            name: event.name,
+            category: event.category,
+            description: event.description,
+            organiser: event.organiser,
+            attendees: event.attendees,
+            status: event.status,
+            logo: tempsavedFile.fileURL,
+            location: event.location,
+            date: event.date,
+        });
+
+        const newValues = await Event.findOne(updatedEvent._id);
+
+        fs.rmSync(path.join(__dirname, '..', 'uploads', tempsavedFile.fileName))
+
+        res.status(200).json({
+            message: "Update Successful!",
+            newValues,
+        });
+    } else {
+        const updatedEvent = await Event.findByIdAndUpdate(req.params.eventID, {
+            name: event.name,
+            category: event.category,
+            description: event.description,
+            organiser: event.organiser,
+            attendees: event.attendees,
+            status: event.status,
+            logo: event.logo,
+            location: event.location,
+            date: event.date,
         });
 
         const newValues = await Event.findOne(updatedEvent._id);
@@ -86,10 +130,14 @@ router.put("/:eventID", verifyToken, async(req, res, next) => {
             message: "Update Successful!",
             newValues,
         });
+    }
+    try {
+
     } catch (error) {
         next(error);
     }
 });
+
 
 
 module.exports = router;
