@@ -34,7 +34,7 @@
         </div>
         <div class="search-box">
             <!-- <p class="h3" style="font-size: 1rem;">Club Details</p> -->
-            <p class="h3"><img *ngIf="!club.logo" src="image6.svg" width="50rem" alt="" style="display: inline;"><img *ngIf="club.logo" src="{{club.logo}}" width="50rem" alt="" style="display: inline;"> {{ club.name }}</p>
+            <p class="h3"><img *ngIf="!club.logo" src="image6.svg" width="200rem" alt="" style="display: inline;"><img *ngIf="club.logo" src="{{club.logo}}" width="200rem" alt="" style="display: inline;"> {{ club.name }}</p>
             <input type="text" id="textInput" placeholder="Enter data to filter by" class="form-control" name="filterInput" [(ngModel)]="filterInput" />
 
         </div>
@@ -101,13 +101,15 @@
                         </div>
                         <div class="input-group">
                             <!-- <label class="form-label" for="description">Desc</label> -->
-                            <input type="file" class="form-control" name="logo" [(ngModel)]="club.logo" />
+                            <input ng2FileSelect type="file" name="logo" (change)="onFileChange($event)" />
                         </div>
                     </div>
                 </div>
-                <button *ngIf="clubForm.dirty" (click)="updateClub(clubForm)" class="btn btn-primary">
+                <p style="display: inline;" *ngIf="loading">loading...</p>
+                <button *ngIf="clubForm.dirty || clubForm.valueChanges" (click)="updateClub(clubForm)" class="btn btn-primary">
   Update
 </button>
+
             </form>
 
         </div>

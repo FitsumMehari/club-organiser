@@ -6,7 +6,8 @@
     </div>
     <div *ngIf="eventFound" class="container">
         <div class="header">
-            <p class="h3">{{ event.name }} </p>
+            <!-- <p class="h3">{{ event.name }} </p> -->
+            <p class="h3"><img *ngIf="!event.logo" src="image6.svg" width="200rem" alt="" style="display: inline;"><img *ngIf="event.logo" src="{{event.logo}}" width="200rem" alt="" style="display: inline;"> {{ event.name }}</p>
             <p class="h3" style="font-size: 1rem;">Event Details </p>
             <form #eventForm="ngForm">
                 <div class="form">
@@ -26,8 +27,13 @@
               <option value="closed">closed</option>
             </select>
                     </div>
+                    <div class="col">
+                        <input ng2FileSelect type="file" name="logo" (change)="onFileChange($event)" />
+                    </div>
                 </div>
-                <button *ngIf="eventForm.dirty" (click)="updateEvent(eventForm)" class="btn btn-primary">
+                <p style="display: inline;" *ngIf="loading">loading...</p>
+
+                <button *ngIf="eventForm.dirty|| eventForm.valueChanges" (click)="updateEvent(eventForm)" class="btn btn-primary">
           Update
         </button>
             </form>

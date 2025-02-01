@@ -19,11 +19,15 @@ export class AuthorizedAddEventDetailsComponent implements OnInit {
     category: '',
     status: '',
   };
+  selectedLogo: File | null = null;
+
   loading: boolean = false;
   eventFound: boolean = false;
   eventValuesChanged: boolean = false;
   ngOnInit(): void {
     this.getEvent();
+    this.loading = false
+
   }
   getEvent() {
     this.eventService.getOneEventById(
@@ -38,7 +42,9 @@ export class AuthorizedAddEventDetailsComponent implements OnInit {
     });
   }
   updateEvent(eventForm: any) {
-    this.eventService.updateEvent(this.event._id, eventForm.value);
+    this.loading = true
+
+    this.eventService.updateEvent(this.event._id, eventForm.value,  this.selectedLogo);
   }
 
   acceptAttendee(eventId: any, attendeeEmail: any) {
@@ -51,5 +57,8 @@ export class AuthorizedAddEventDetailsComponent implements OnInit {
     this.loading = true;
 
     // window.location.reload();
+  }
+  onFileChange(event: any) {
+    this.selectedLogo = event.target.files[0] || null;
   }
 }
