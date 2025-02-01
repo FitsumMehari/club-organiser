@@ -68,12 +68,17 @@ export class ClubsService {
         (error) => {}
       );
   }
-  updateClub(clubId: any, club:any) {
+  updateClub(clubId: any, club:any, logo:any) {
+    const formData = new FormData();
+
+    formData.append('club', JSON.stringify( club ));
+    formData.append('logo', logo)
+
     let headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
     this.http
-      .put(`${this.apiUrl}clubs/${clubId}`, club, {
+      .put(`${this.apiUrl}clubs/${clubId}`, formData, {
         headers: headers,
       })
       .subscribe(
