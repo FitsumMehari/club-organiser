@@ -13,6 +13,8 @@ export class AuthorizedClubsComponent implements OnInit {
   clubsFound: boolean = false;
   filterInput: any;
 
+  sortOption: string = ''
+
   ngOnInit(): void {
     this.clubsService.getAllClubs();
     this.clubsService._response.subscribe((next) => {
@@ -27,5 +29,19 @@ export class AuthorizedClubsComponent implements OnInit {
   deleteclub(clubId: any) {
     this.clubsService.deleteClub(clubId)
     window.location.reload()
+  }
+  sortClubs() {
+    if (!this.sortOption) return;
+
+    const [key, order] = this.sortOption.split('-');
+    this.clubs.sort((a: any, b: any) => {
+      if (a[key] < b[key]) {
+        return order === 'asc' ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return order === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
   }
 }
