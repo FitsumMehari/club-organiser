@@ -12,6 +12,20 @@ const QRCode = require("qrcode");
 const fs = require("fs");
 const path = require("path");
 
+const cloudinaryFileUpload = require("./cloudinaryFileUpload");
+const multer = require("multer");
+
+// Configure Multer for file upload handling
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "uploads/");
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
+const upload = multer({ storage: storage });
+
 // Get Single Club By ID Of Manager
 router.get("/club", verifyToken, async(req, res, next) => {
     if (!req.user._id) {
@@ -156,48 +170,109 @@ router.get(
     }
 );
 // Add a new event
-router.post("/club/events/:clubID", verifyToken, async(req, res, next) => {
-    if (req.params.clubID) {
-        if (!req.body.name ||
-            !req.body.category ||
-            !req.body.description ||
-            !req.body.status
-        ) {
-            res.status(200).json({ message: "Please fill the required inputs!" });
-        } else {
-            const newEvent = new Event({
-                logo: req.body.logo,
-                name: req.body.name,
-                category: req.body.category,
-                description: req.body.description,
-                organiser: req.params.clubID,
-                location: req.body.location,
-                date: req.body.date,
-                attendees: req.body.attendees,
-                status: req.body.status,
-            });
-            try {
-                const savedEvent = await newEvent.save();
+router.post(
+    "/club/events/:clubID",
+    verifyToken,
+    upload.single("logo"),
+    async(req, res, next) => {
+        console.log(req.body);
+        console.log(req.file);
 
-                if (savedEvent) {
-                    const club = await Club.findById(req.params.clubID);
-                    club.events.push(savedEvent._id);
-                    console.log(savedEvent._id);
-                    club.save();
-                    res
-                        .status(201)
-                        .json({ message: "Event Created Successfully!", savedEvent });
+        let event = JSON.parse(req.body.event);
+
+        if (req.file) {
+            const tempfileName = req.file.originalname;
+            const tempfileURL = req.file.path;
+            const tempsavedFile = await cloudinaryFileUpload.setSavedFile(
+                tempfileName,
+                tempfileURL
+            );
+
+            if (req.params.clubID) {
+                if (!event.name ||
+                    !event.category ||
+                    !event.description ||
+                    !event.status
+                ) {
+                    res.status(200).json({ message: "Please fill the required inputs!" });
                 } else {
-                    res.status(400).json({ message: "Not Saved!" });
+                    const newEvent = new Event({
+                        logo: tempsavedFile.fileURL,
+                        name: event.name,
+                        category: event.category,
+                        description: event.description,
+                        organiser: req.params.clubID,
+                        location: event.location,
+                        date: event.date,
+                        attendees: event.attendees,
+                        status: event.status,
+                    });
+                    try {
+                        const savedEvent = await newEvent.save();
+
+                        if (savedEvent) {
+                            const club = await Club.findById(req.params.clubID);
+                            club.events.push(savedEvent._id);
+                            club.save();
+                            fs.rmSync(path.join(__dirname, '..', 'uploads', tempsavedFile.fileName))
+
+                            res
+                                .status(201)
+                                .json({ message: "Event Created Successfully!", savedEvent });
+                        } else {
+                            res.status(400).json({ message: "Not Saved!" });
+                        }
+                    } catch (err) {
+                        return next(err);
+                    }
                 }
-            } catch (err) {
-                return next(err);
+            } else {
+                res.status(400).json({ message: "Invalid club ID!" });
+            }
+        } else {
+            if (req.params.clubID) {
+                if (!event.name ||
+                    !event.category ||
+                    !event.description ||
+                    !event.status
+                ) {
+                    res.status(200).json({ message: "Please fill the required inputs!" });
+                } else {
+                    const newEvent = new Event({
+                        logo: event.logo,
+                        name: event.name,
+                        category: event.category,
+                        description: event.description,
+                        organiser: req.params.clubID,
+                        location: event.location,
+                        date: event.date,
+                        attendees: event.attendees,
+                        status: event.status,
+                    });
+                    try {
+                        const savedEvent = await newEvent.save();
+
+                        if (savedEvent) {
+                            const club = await Club.findById(req.params.clubID);
+                            club.events.push(savedEvent._id);
+                            console.log(savedEvent._id);
+                            club.save();
+                            res
+                                .status(201)
+                                .json({ message: "Event Created Successfully!", savedEvent });
+                        } else {
+                            res.status(400).json({ message: "Not Saved!" });
+                        }
+                    } catch (err) {
+                        return next(err);
+                    }
+                }
+            } else {
+                res.status(400).json({ message: "Invalid club ID!" });
             }
         }
-    } else {
-        res.status(400).json({ message: "Invalid club ID!" });
     }
-});
+);
 
 // Delete A event By event ID
 router.delete("/club/events/:eventID", verifyToken, async(req, res, next) => {
@@ -264,8 +339,8 @@ router.put(
                             light: "#FFFFFF",
                         },
                     };
-                    let imageFileName = `${pendingRequest.email}.png`
-                        // Generate QR code and save as image
+                    let imageFileName = `${pendingRequest.email}.png`;
+                    // Generate QR code and save as image
                     QRCode.toFile(
                         path.join(__dirname, imageFileName),
                         data,
@@ -287,17 +362,15 @@ router.put(
 
                     await transporter.sendMail(mailOptions);
                     try {
-                        // remove the generated image 
-                        fs.rmSync(path.join(__dirname, imageFileName))
+                        // remove the generated image
+                        fs.rmSync(path.join(__dirname, imageFileName));
                     } catch (error) {
                         console.log(error);
-
                     }
 
                     return res
                         .status(200)
                         .json({ message: "Reservation request approved!" });
-
                 }
 
                 res.status(200).json({

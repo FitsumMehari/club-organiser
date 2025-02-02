@@ -6,35 +6,10 @@
     </div>
     <div *ngIf="clubFound" class="container">
         <div class="header">
-            <!-- <p class="h3"> {{ club.name }}</p>
-            <p class="h3" style="font-size: 1rem;">Club Details</p>
-            <form #clubForm="ngForm">
-                <div class="form">
-                    <div class="col">
-                        <input type="text" class="form-control" name="name" [(ngModel)]="club.name" />
-                        <input type="text" class="form-control" name="description" [(ngModel)]="club.description" />
-                    </div>
-                    <div class="col">
-                        <select name="category" id="category" name="category" [(ngModel)]="club.category">
-            <option value="undefined">undefined</option>
-            <option value="social">social</option>
-            <option value="academic">academic</option>
-            <option value="management">management</option>
-          </select>
-                        <select name="category" id="category" name="status" [(ngModel)]="club.status">
-            <option value="open">open</option>
-            <option value="closed">closed</option>
-          </select>
-                    </div>
-                </div>
-                <button *ngIf="clubForm.dirty" (click)="updateClub(clubForm)" class="btn btn-primary">
-        Update
-      </button>
-            </form> -->
         </div>
         <div class="search-box">
             <!-- <p class="h3" style="font-size: 1rem;">Club Details</p> -->
-            <p class="h3"><img *ngIf="!club.logo" src="image6.svg" width="50rem" alt="" style="display: inline;"><img *ngIf="club.logo" src="{{club.logo}}" width="50rem" alt="" style="display: inline;"> {{ club.name }}</p>
+            <p class="h3"><img *ngIf="!copyClub.logo" src="image6.svg" width="200rem" alt="" style="display: inline;"><img *ngIf="copyClub.logo" src="{{copyClub.logo}}" width="200rem" alt="" style="display: inline;"> {{ copyClub.name }}</p>
             <input type="text" id="textInput" placeholder="Enter data to filter by" class="form-control" name="filterInput" [(ngModel)]="filterInput" />
 
         </div>
@@ -101,13 +76,15 @@
                         </div>
                         <div class="input-group">
                             <!-- <label class="form-label" for="description">Desc</label> -->
-                            <input type="file" class="form-control" name="logo" [(ngModel)]="club.logo" />
+                            <input ng2FileSelect type="file" name="logo" (change)="onFileChange($event)" />
                         </div>
                     </div>
                 </div>
-                <button *ngIf="clubForm.dirty" (click)="updateClub(clubForm)" class="btn btn-primary">
+                <p style="display: inline;" *ngIf="loading">loading...</p>
+                <button *ngIf="clubForm.dirty || clubForm.valueChanges" (click)="updateClub(clubForm)" class="btn btn-primary">
   Update
 </button>
+
             </form>
 
         </div>

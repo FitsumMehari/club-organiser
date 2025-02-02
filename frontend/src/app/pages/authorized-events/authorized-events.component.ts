@@ -17,6 +17,8 @@ export class AuthorizedEventsComponent {
     private router: Router
   ) {}
 
+  sortOption:string = ''
+
   club: any;
   user: any;
   events: any;
@@ -61,5 +63,19 @@ export class AuthorizedEventsComponent {
 
   add() {
     this.router.navigate([{outlets: {authorized: ['add-event']}}])
+  }
+  sortEvents() {
+    if (!this.sortOption) return;
+
+    const [key, order] = this.sortOption.split('-');
+    this.events.sort((a: any, b: any) => {
+      if (a[key] < b[key]) {
+        return order === 'asc' ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return order === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
   }
 }

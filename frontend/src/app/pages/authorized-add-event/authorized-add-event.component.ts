@@ -14,9 +14,12 @@ export class AuthorizedAddEventComponent implements OnInit {
     private clubService: ClubsService,
     private authService: AuthService
   ) {}
+  loading: boolean = false;
   event: any = {};
   user: any;
   club: any;
+  selectedLogo: File | null = null;
+
   ngOnInit(): void {
     this.authService._user.subscribe((next) => {
       this.user = next;
@@ -28,6 +31,13 @@ export class AuthorizedAddEventComponent implements OnInit {
     });
   }
   add() {
-    this.eventService.addEvent(this.club._id, this.event)
+    this.loading = true;
+    if(!this.event.category) this.event.category = 'undefined'
+
+    this.eventService.addEvent(this.club._id, this.event, this.selectedLogo);
+    this.loading = false
+  }
+  onFileChange(event: any) {
+    this.selectedLogo = event.target.files[0] || null;
   }
 }

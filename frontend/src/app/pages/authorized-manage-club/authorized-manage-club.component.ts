@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ClubsService } from '../../services/clubs.service';
 import { ActivatedRoute } from '@angular/router';
+import { FileUploader, FileUploadModule } from 'ng2-file-upload';
+
 
 @Component({
   selector: 'app-authorized-manage-club',
@@ -20,6 +22,15 @@ export class AuthorizedManageClubComponent {
     category: '',
     status: '',
   };
+
+  copyClub: any = {
+    name: '',
+    description: '',
+    category: '',
+    status: '',
+  };
+  selectedLogo: File | null = null;
+
   loading: boolean = false;
   clubFound: boolean = false;
   clubValuesChanged: boolean = false;
@@ -33,11 +44,16 @@ export class AuthorizedManageClubComponent {
         this.clubFound = true;
         this.club = { ...next };
         this.club = next;
+        Object.assign(this.copyClub, this.club)
+        this.loading = false
       }
     });
   }
   updateClub(clubForm: any) {
-    this.clubService.updateClub(this.club._id, clubForm.value);
+    this.loading = true
+    if(!this.club.category) this.club.category = 'undefined'
+
+    this.clubService.updateClub(this.club._id, clubForm.value, this.selectedLogo);
     this.getClub()
   }
 
@@ -52,4 +68,9 @@ export class AuthorizedManageClubComponent {
 
     window.location.reload();
   }
+
+  onFileChange(event: any) {
+    this.selectedLogo = event.target.files[0] || null;
+  }
+
 }

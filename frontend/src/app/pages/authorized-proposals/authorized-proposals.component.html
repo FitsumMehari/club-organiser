@@ -1,12 +1,18 @@
 <div class="page">
-
     <div class="search-box">
         <h2>Proposals</h2>
         <input type="text" id="textInput" placeholder="Enter data to filter by" class="form-control" name="filterInput" [(ngModel)]="filterInput" />
+        <select style="width: 10rem; padding: 0.5rem; cursor: pointer" [(ngModel)]="sortOption" (change)="sortProposals()">
+      <option value="">Select sorting option</option>
+      <option value="organiser.username-asc">Username (asc)</option>
+      <option value="organiser.username-desc">Username (desc)</option>
+      <option value="club.name-asc">Club Name (asc)</option>
+      <option value="club.name-desc">Club Name (desc)</option>
+    </select>
     </div>
 
     <div class="proposals">
-        <div *ngFor="let proposal of proposals | filter:filterInput" class="proposal">
+        <div *ngFor="let proposal of proposals | filter : filterInput" class="proposal">
             <div class="organiser">
                 <h4 class="organizer-title">Organiser Details</h4>
                 <div class="details">

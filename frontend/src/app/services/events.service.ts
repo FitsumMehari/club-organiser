@@ -38,12 +38,17 @@ export class EventsService {
     );
   }
 
-  updateEvent(eventId: any, event: any) {
+  updateEvent(eventId: any, event: any, logo:any) {
+    const formData = new FormData();
+
+    formData.append('event', JSON.stringify( event ));
+    formData.append('logo', logo)
+
     let headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
     this.http
-      .put(`${this.apiUrl}events/${eventId}`, event, {
+      .put(`${this.apiUrl}events/${eventId}`, formData, {
         headers: headers,
       })
       .subscribe(
@@ -92,12 +97,16 @@ export class EventsService {
       );
   }
 
-  addEvent(clubId: any, event: any) {
+  addEvent(clubId: any, event: any, logo:any) {
+    const formData = new FormData();
+
+    formData.append('event', JSON.stringify( event ));
+    formData.append('logo', logo)
     let headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
     this.http
-      .post(`${this.apiUrl}managers/club/events/${clubId}`, event, {
+      .post(`${this.apiUrl}managers/club/events/${clubId}`, formData, {
         headers: headers,
       })
       .subscribe(

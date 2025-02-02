@@ -1,6 +1,7 @@
 <div class="page">
     <div class="top">
-        <input type="text" placeholder="search">
+        <input type="text" placeholder="Search" name="filterInput" [(ngModel)]="filterInput">
+
         <ul class="buttons">
             <li>
                 <button (click)="filterEvents('social')">Social</button>
@@ -20,7 +21,7 @@
         </ul>
     </div>
     <div class="events">
-        <div class="event" *ngFor="let event of allEvents">
+        <div class="event" *ngFor="let event of allEvents | filter:filterInput">
             <img *ngIf="event.logo" src="{{event.logo}}" alt="">
             <img *ngIf="!event.logo" src="image7.svg" alt="">
             <p>{{event.status}}</p>

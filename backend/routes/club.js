@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const dotenv = require("dotenv");
 
+const fs = require("fs");
+const path = require("path")
+
 dotenv.config();
 
 const Club = require("../models/Club");
@@ -8,6 +11,28 @@ const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 
 const transporter = require("./transporter");
 
+const cloudinaryFileUpload = require('./cloudinaryFileUpload');
+const multer = require('multer');
+
+// Configure Multer for file upload handling
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads/'); // Create an 'uploads' folder in your project
+//     },
+//     filename: (req, file, cb) => {
+//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//         cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop()); // Or a simpler filename
+//     }
+// });
+const upload = multer({ storage: storage })
 
 // Add New Club
 router.post("/", verifyTokenAndAuthorization, async(req, res, next) => {
@@ -73,22 +98,51 @@ router.get("/:clubID", async(req, res, next) => {
 });
 
 // Update A CLub By Club ID
-router.put("/:clubID", verifyToken, async(req, res, next) => {
+router.put("/:clubID", verifyToken, upload.single("logo"), async(req, res, next) => {
+
+
+    let club = JSON.parse(req.body.club)
+
+
     try {
-        const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
-            name: req.body.name,
-            category: req.body.category,
-            description: req.body.description,
-            status: req.body.status,
-            location: req.body.location,
-        });
+        if (req.file) {
+            const tempfileName = req.file.originalname;
+            const tempfileURL = req.file.path;
+            const tempsavedFile = await cloudinaryFileUpload.setSavedFile(tempfileName, tempfileURL);
 
-        const newValues = await Club.findOne(updatedClub._id);
+            const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
+                name: club.name,
+                category: club.category,
+                description: club.description,
+                status: club.status,
+                location: club.location,
+                logo: tempsavedFile.fileURL,
+            });
+            const newValues = await Club.findOne(updatedClub._id);
 
-        res.status(200).json({
-            message: "Update Successful!",
-            newValues,
-        });
+            fs.rmSync(path.join(__dirname, '..', 'uploads', tempsavedFile.fileName))
+
+            res.status(200).json({
+                message: "Update Successful!",
+                newValues,
+            });
+
+        } else {
+            const updatedClub = await Club.findByIdAndUpdate(req.params.clubID, {
+                name: club.name,
+                category: club.category,
+                description: club.description,
+                status: club.status,
+                location: club.location
+            });
+            const newValues = await Club.findOne(updatedClub._id);
+
+            res.status(200).json({
+                message: "Update Successful!",
+                newValues,
+            });
+        }
+
     } catch (error) {
         next(error);
     }
@@ -159,5 +213,7 @@ router.delete("/:clubID", verifyToken, async(req, res, next) => {
         next(error);
     }
 });
+
+
 
 module.exports = router;
