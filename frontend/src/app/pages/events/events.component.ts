@@ -10,6 +10,7 @@ export class EventsComponent {
    constructor(private eventsService: EventsService) {}
 
     allEvents:any = []
+    filterInput : string = ''
 
     ngOnInit(): void {
       this.eventsService.getAllEvents();
