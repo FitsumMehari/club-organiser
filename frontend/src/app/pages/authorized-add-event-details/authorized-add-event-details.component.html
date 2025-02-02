@@ -28,6 +28,7 @@
             </select>
                     </div>
                     <div class="col">
+                        <input type="text" class="form-control" name="location" [(ngModel)]="event.location" />
                         <input ng2FileSelect type="file" name="logo" (change)="onFileChange($event)" />
                     </div>
                 </div>
