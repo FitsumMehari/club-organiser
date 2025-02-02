@@ -43,6 +43,7 @@ export class AuthorizedAddEventDetailsComponent implements OnInit {
   }
   updateEvent(eventForm: any) {
     this.loading = true
+    if(!this.event.category) this.event.category = 'undefined'
 
     this.eventService.updateEvent(this.event._id, eventForm.value,  this.selectedLogo);
   }
