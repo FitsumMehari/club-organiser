@@ -8,7 +8,7 @@
 
                 <form #addEventForm="ngForm" (ngSubmit)="add()">
                     <div class="form-outline mb-2">
-                        <label class=" " for="category">category*</label>
+                        <label for="category">category*</label>
                         <select [(ngModel)]="event.category" name="category" id="category" class="form-control form-select">
               <option class="form-control" value="undefined" >undefined</option>
               <option class="form-control" value="social">social</option>
@@ -40,10 +40,11 @@
                     </div>
                     <div class="form-outline mb-2">
                         <label class="" for="location">logo*</label>
-                        <input type="file" [(ngModel)]="event.logo" name="logo" id="logo" class="form-control" />
+                        <input ng2FileSelect type="file" name="logo" (change)="onFileChange($event)" />
                     </div>
 
                     <div class="mt-2">
+                        <p *ngIf="loading">Loading...</p>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
