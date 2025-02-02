@@ -22,6 +22,13 @@ export class AuthorizedManageClubComponent {
     category: '',
     status: '',
   };
+
+  copyClub: any = {
+    name: '',
+    description: '',
+    category: '',
+    status: '',
+  };
   selectedLogo: File | null = null;
 
   loading: boolean = false;
@@ -37,12 +44,15 @@ export class AuthorizedManageClubComponent {
         this.clubFound = true;
         this.club = { ...next };
         this.club = next;
+        Object.assign(this.copyClub, this.club)
         this.loading = false
       }
     });
   }
   updateClub(clubForm: any) {
     this.loading = true
+    if(!this.club.category) this.club.category = 'undefined'
+
     this.clubService.updateClub(this.club._id, clubForm.value, this.selectedLogo);
     this.getClub()
   }
