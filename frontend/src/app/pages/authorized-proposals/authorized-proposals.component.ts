@@ -8,6 +8,7 @@ import { ProposalService } from '../../services/proposal.service';
 })
 export class AuthorizedProposalsComponent implements OnInit {
   constructor(private proposalService: ProposalService) {}
+  sortOption:string = ''
   proposals: any = [];
   loading: boolean = false;
   filterInput: any;
@@ -25,5 +26,19 @@ export class AuthorizedProposalsComponent implements OnInit {
   rejectProposal(proposalId: any) {
     this.proposalService.rejectProposal(proposalId);
     this.loading = true;
+  }
+  sortProposals() {
+    if (!this.sortOption) return;
+
+    const [key, order] = this.sortOption.split('-');
+    this.proposals.sort((a: any, b: any) => {
+      if (a[key] < b[key]) {
+        return order === 'asc' ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return order === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
   }
 }
