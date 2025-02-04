@@ -12,6 +12,7 @@ const jwtPrivateKey = process.env.JWTKEY;
 dotenv.config();
 
 const User = require("../models/User");
+const Club = require("../models/Club");
 const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 
 // Register
@@ -230,7 +231,20 @@ router.get(
     async(req, res, next) => {
         const organizers = await User.find();
 
-        res.status(200).json(organizers);
+        const updatedOrganizers = [];
+
+        for (const organizer of organizers) {
+            let theirClub = await Club.findById(organizer.clubs[0]);
+            if (theirClub) {
+                console.log(theirClub.name);
+                const updatedOrganizer = {...organizer._doc, club: theirClub.name }; // Create a *new* object
+                updatedOrganizers.push(updatedOrganizer);
+            } else {
+                updatedOrganizers.push(organizer); // Keep the original if no club is found
+            }
+        }
+
+        res.status(200).json(updatedOrganizers);
     }
 );
 
