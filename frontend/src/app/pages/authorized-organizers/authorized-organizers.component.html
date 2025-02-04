@@ -24,7 +24,7 @@
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-
+                        <th scope="col">ClubName</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -34,6 +34,7 @@
                         <td [ngClass]="{'grey-body': i%2==0}">{{organizer.username}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{organizer.email}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{organizer.phone}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{organizer.club}}</td>
 
                         <td [ngClass]="{'grey-body': i%2==0}">
                             <!-- <i (click)="updateOrganizer(organizer._id) " class="icon icon-edit bi bi-pencil "></i> -->
