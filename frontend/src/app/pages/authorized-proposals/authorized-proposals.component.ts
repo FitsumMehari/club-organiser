@@ -31,11 +31,14 @@ export class AuthorizedProposalsComponent implements OnInit {
     if (!this.sortOption) return;
 
     const [key, order] = this.sortOption.split('-');
+
+    const [keyOne, keyTwo] = key.split('.');
+
     this.proposals.sort((a: any, b: any) => {
-      if (a[key] < b[key]) {
+      if (a[keyOne][keyTwo] < b[keyOne][keyTwo]) {
         return order === 'asc' ? -1 : 1;
       }
-      if (a[key] > b[key]) {
+      if (a[keyOne][keyTwo] > b[keyOne][keyTwo]) {
         return order === 'asc' ? 1 : -1;
       }
       return 0;
