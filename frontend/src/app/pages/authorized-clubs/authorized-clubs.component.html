@@ -24,6 +24,7 @@
                         <th scope="col">Club Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Organiser</th>
 
                         <th scope="col">Action</th>
                     </tr>
@@ -34,6 +35,7 @@
                         <td [ngClass]="{'grey-body': i%2==0}">{{club.name}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{club.description}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{club.category}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{club.organiser}}</td>
 
                         <td [ngClass]="{'grey-body': i%2==0}">
                             <!-- <i (click)="updateclub(club._id) " class="icon icon-edit bi bi-pencil "></i> -->

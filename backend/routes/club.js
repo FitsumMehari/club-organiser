@@ -7,6 +7,7 @@ const path = require("path")
 dotenv.config();
 
 const Club = require("../models/Club");
+const Organiser = require('../models/User')
 const { verifyTokenAndAuthorization, verifyToken } = require("./verifyToken");
 
 const transporter = require("./transporter");
@@ -77,7 +78,21 @@ router.post("/", verifyTokenAndAuthorization, async(req, res, next) => {
 router.get("/", async(req, res, next) => {
     try {
         const allClubs = await Club.find({});
-        res.status(200).json(allClubs);
+        const updatedAllClubs = [];
+
+        for (const club of allClubs) {
+            let theirOrganiser = await Organiser.findById(club.managers[0]);
+            if (theirOrganiser) {
+                const updatedClub = {...club._doc, organiser: theirOrganiser.username }; // Create a *new* object
+                updatedAllClubs.push(updatedClub);
+
+            } else {
+                updatedAllClubs.push(club); // Keep the original if no club is found
+            }
+        }
+        // console.log(updatedAllClubs[0]);
+
+        res.status(200).json(updatedAllClubs);
     } catch (error) {
         next(error);
     }
