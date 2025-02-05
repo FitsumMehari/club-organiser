@@ -49,6 +49,7 @@
 }
 
 .events>.event {
+    height: 25rem;
     padding-top: 1rem;
     margin: .5rem;
     cursor: pointer;
@@ -88,7 +89,7 @@
 }
 
 .events>.event>img {
-    width: 60%;
-    height: 60%;
+    width: 12rem !important;
+    height: 10rem !important;
     border-radius: .5rem
 }
