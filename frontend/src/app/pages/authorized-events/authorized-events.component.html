@@ -33,14 +33,14 @@
                 <tbody>
                     <tr *ngFor="let event of events | filter:filterInput; let i = index">
                         <th [ngClass]="{'grey-body': i%2==0}" scope=" row ">{{i + 1}}</th>
-                        <td [ngClass]="{'grey-body': i%2==0}" class="event-name-link" (click)="gotoDetails(event._id)">{{event.name}}</td>
+                        <td [ngClass]="{'grey-body': i%2==0}">{{event.name}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{event.description}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{event.category}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{event.status}}</td>
                         <td [ngClass]="{'grey-body': i%2==0}">{{event.location}}</td>
 
                         <td [ngClass]="{'grey-body': i%2==0}">
-                            <!-- <i *ngIf="user.userType === 'organiser'" (click)="updateevent(event._id) " class="icon icon-edit bi bi-pencil "></i> -->
+                            <i (click)="gotoDetails(event._id)" class="icon icon-edit bi bi-pencil "></i>
                             <i (click)="deleteevent(event._id) " class="icon icon-delete bi bi-trash "></i>
                         </td>
                     </tr>
