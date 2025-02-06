@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css'
+  styleUrl: './contact.component.css',
 })
 export class ContactComponent implements OnInit {
+  constructor(private contactService: ContactService) {}
   formdetails = {
     left: {
       top: {
@@ -33,39 +35,28 @@ export class ContactComponent implements OnInit {
       },
       bottom: {
         right: {
-          top: "SEND MESSAGE",
-        }
+          top: 'SEND MESSAGE',
+        },
       },
     },
   };
-ngOnInit(): void {
+  contactDetails = {};
 
-}
-  handleSubmit($event:any) {
-
-    if($event.PhoneNumber.match(/[a-z]/i) || $event.PhoneNumber == ''){
-      alert("Invalid Phone Number")
-    }
-    else if(!$event.Email.match(/[@]/) || $event.Email == ''){
-      alert("Invalid Email")
-    }
-    else if($event.FirstName == ''){
-      alert("Invalid First Name")
-    }
-    else if($event.LastName == ''){
-      alert("Invalid Last Name")
-    }
-    else if($event.Message == ''){
-      alert("Invalid Message")
-    }
-    else {
-      alert("Thank you for your message!")
-      window.location.reload()
-      // console.log($event.FirstName);
-      // console.log($event.LastName);
-      // console.log($event.Email);
-      // console.log($event.PhoneNumber);
-      // console.log($event.Message);
+  ngOnInit(): void {}
+  handleSubmit($event: any) {
+    if ($event.PhoneNumber.match(/[a-z]/i) || $event.PhoneNumber == '') {
+      alert('Invalid Phone Number');
+    } else if (!$event.Email.match(/[@]/) || $event.Email == '') {
+      alert('Invalid Email');
+    } else if ($event.FirstName == '') {
+      alert('Invalid First Name');
+    } else if ($event.LastName == '') {
+      alert('Invalid Last Name');
+    } else if ($event.Message == '') {
+      alert('Invalid Message');
+    } else {
+      this.contactDetails = $event;
+      this.contactService.sendMessage(this.contactDetails);
     }
   }
 }
