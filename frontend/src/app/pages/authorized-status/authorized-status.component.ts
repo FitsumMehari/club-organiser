@@ -20,11 +20,13 @@ export class AuthorizedStatusComponent {
   clubs: any;
   proposals: any;
   events: any;
+  organizers: any;
 
   ngOnInit(): void {
     this.refreshClubsList();
     this.refreshProposalsList();
     this.refreshEventsList();
+    this.refreshOrganizersList();
   }
   // Refresh The Lists
   refreshClubsList() {
@@ -45,6 +47,12 @@ export class AuthorizedStatusComponent {
     this.proposalService.getAllProposals();
     this.proposalService._response.subscribe((next) => {
       this.proposals = next;
+    });
+  }
+  refreshOrganizersList() {
+    this.organiserService.getAllOrganizers();
+    this.organiserService._response.subscribe((next) => {
+      this.organizers = next;
     });
   }
 
